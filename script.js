@@ -9,40 +9,608 @@ const pageButtons = document.querySelectorAll('[data-page]');
 const toast = document.querySelector('#toast');
 
 const questions = [
+  // A. W / C : Warm vs Cool
   {
+    id: 'q1',
     axis: 'wc',
-    title: '어떤 렌즈 컬러가 더 끌리나요?',
-    description: '평소 메이크업과 옷 스타일을 떠올리며 골라주세요.',
+    title: '평소 본인에게 더 잘 어울린다고 느끼는 색은 무엇인가요?',
+    description: '옷, 메이크업, 액세서리 색을 떠올리며 골라주세요.',
     options: [
-      { value: 'W', icon: '☀️', title: '따뜻한 브라운 계열', text: '골드, 코랄, 베이지처럼 포근하고 따뜻한 색감' },
-      { value: 'C', icon: '❄️', title: '차분한 그레이 계열', text: '애쉬, 블루, 라벤더처럼 시원하고 맑은 색감' },
+      {
+        value: 'warm_color',
+        icon: '☀️',
+        title: '베이지, 브라운, 코랄, 골드 계열',
+        text: '따뜻하고 부드러운 색감이 잘 어울리는 편',
+        score: { W: 1 },
+      },
+      {
+        value: 'cool_color',
+        icon: '❄️',
+        title: '화이트, 그레이, 핑크, 실버 계열',
+        text: '맑고 차분한 색감이 잘 어울리는 편',
+        score: { C: 1 },
+      },
+      {
+        value: 'unknown_color',
+        icon: '？',
+        title: '잘 모르겠음',
+        text: '이 경우 사진 분석 결과를 우선 반영할 수 있어요.',
+        score: {},
+      },
     ],
   },
   {
+    id: 'q2',
+    axis: 'wc',
+    title: '평소 사용하는 립/블러셔 색상은 어느 쪽에 가까운가요?',
+    description: '메이크업을 거의 하지 않는다면 잘 모르겠음을 선택해도 괜찮아요.',
+    options: [
+      {
+        value: 'warm_makeup',
+        icon: '🍑',
+        title: '코랄, 오렌지, 피치, 브릭',
+        text: '따뜻하고 생기 있는 메이크업 색상',
+        score: { W: 1 },
+      },
+      {
+        value: 'cool_makeup',
+        icon: '🌷',
+        title: '핑크, 로즈, 모브, 베리',
+        text: '맑거나 차분한 메이크업 색상',
+        score: { C: 1 },
+      },
+      {
+        value: 'no_makeup',
+        icon: '○',
+        title: '메이크업을 거의 하지 않음 / 잘 모르겠음',
+        text: '이 경우 사진 분석 결과를 우선 반영할 수 있어요.',
+        score: {},
+      },
+    ],
+  },
+  {
+    id: 'q3',
+    axis: 'wc',
+    title: '액세서리는 어느 쪽이 더 잘 어울린다고 느끼나요?',
+    description: '평소 착용했을 때 얼굴이 더 살아 보이는 쪽을 골라주세요.',
+    options: [
+      {
+        value: 'gold',
+        icon: '🥇',
+        title: '골드',
+        text: '따뜻한 금빛 액세서리가 잘 어울리는 편',
+        score: { W: 1 },
+      },
+      {
+        value: 'silver',
+        icon: '🥈',
+        title: '실버',
+        text: '차갑고 맑은 은빛 액세서리가 잘 어울리는 편',
+        score: { C: 1 },
+      },
+      {
+        value: 'both_accessory',
+        icon: '◐',
+        title: '둘 다 비슷함 / 잘 모르겠음',
+        text: '이 문항은 보정 문항으로만 사용해요.',
+        score: {},
+      },
+    ],
+  },
+  {
+    id: 'q4',
+    axis: 'wc',
+    title: '본인의 퍼스널컬러를 알고 있나요?',
+    description: '알고 있다면 가장 가까운 타입을 골라주세요.',
+    options: [
+      {
+        value: 'spring_warm',
+        icon: '🌼',
+        title: '봄 웜',
+        text: '밝고 따뜻한 색감이 잘 어울리는 타입',
+        score: { W: 2 },
+      },
+      {
+        value: 'autumn_warm',
+        icon: '🍂',
+        title: '가을 웜',
+        text: '깊고 따뜻한 색감이 잘 어울리는 타입',
+        score: { W: 2 },
+      },
+      {
+        value: 'summer_cool',
+        icon: '🫧',
+        title: '여름 쿨',
+        text: '맑고 부드러운 쿨톤 색감이 잘 어울리는 타입',
+        score: { C: 2 },
+      },
+      {
+        value: 'winter_cool',
+        icon: '🧊',
+        title: '겨울 쿨',
+        text: '선명하고 차가운 쿨톤 색감이 잘 어울리는 타입',
+        score: { C: 2 },
+      },
+      {
+        value: 'unknown_personal_color',
+        icon: '？',
+        title: '모름',
+        text: '사진 분석 결과를 우선 반영할 수 있어요.',
+        score: {},
+      },
+    ],
+  },
+
+  // B. E / U : Everyday vs Unique
+  {
+    id: 'q5',
     axis: 'eu',
-    title: '렌즈를 착용했을 때 원하는 분위기는?',
-    description: '가장 자주 렌즈를 착용하는 상황을 기준으로 골라주세요.',
+    title: '컬러렌즈를 주로 착용하려는 목적은 무엇인가요?',
+    description: '가장 자주 사용할 상황을 기준으로 골라주세요.',
     options: [
-      { value: 'E', icon: '🌿', title: 'Everyday', text: '매일 부담 없이 자연스럽고 편안한 분위기' },
-      { value: 'U', icon: '✨', title: 'Unique', text: '사진과 특별한 날에 눈에 띄는 개성 있는 분위기' },
+      {
+        value: 'daily_school_work',
+        icon: '🏫',
+        title: '출근 / 등교 / 일상용',
+        text: '매일 부담 없이 착용하고 싶어요.',
+        score: { E: 2 },
+      },
+      {
+        value: 'natural_clear',
+        icon: '🫧',
+        title: '자연스럽게 눈만 또렷해지는 용도',
+        text: '렌즈 티는 적고 눈매만 또렷했으면 해요.',
+        score: { E: 2 },
+      },
+      {
+        value: 'selfie_photo',
+        icon: '📸',
+        title: '사진 / 셀카 촬영용',
+        text: '사진에서 발색과 분위기가 잘 보였으면 해요.',
+        score: { U: 2 },
+      },
+      {
+        value: 'event_travel',
+        icon: '✨',
+        title: '여행 / 공연 / 행사용',
+        text: '특별한 날 포인트를 주고 싶어요.',
+        score: { U: 2 },
+      },
+      {
+        value: 'mood_change',
+        icon: '🌙',
+        title: '분위기 변화를 주는 용도',
+        text: '평소와 다른 이미지를 연출하고 싶어요.',
+        score: { U: 2 },
+      },
     ],
   },
   {
+    id: 'q6',
+    axis: 'eu',
+    title: '원하는 렌즈 이미지는 어느 쪽에 가까운가요?',
+    description: '착용했을 때 가장 원하는 느낌을 골라주세요.',
+    options: [
+      {
+        value: 'not_obvious',
+        icon: '🌿',
+        title: '티 나지 않고 자연스러운 느낌',
+        text: '렌즈를 낀 듯 안 낀 듯 편안한 느낌',
+        score: { E: 1 },
+      },
+      {
+        value: 'close_natural',
+        icon: '🤍',
+        title: '가까이 봐야 렌즈 낀 걸 알 수 있는 느낌',
+        text: '은은하지만 눈은 또렷해지는 느낌',
+        score: { E: 1 },
+      },
+      {
+        value: 'photo_color',
+        icon: '📷',
+        title: '사진에서 발색이 잘 보이는 느낌',
+        text: '사진에 렌즈 컬러가 또렷하게 나왔으면 해요.',
+        score: { U: 1 },
+      },
+      {
+        value: 'different_mood',
+        icon: '💫',
+        title: '평소와 다른 분위기로 바뀌는 느낌',
+        text: '눈빛 자체가 달라 보였으면 해요.',
+        score: { U: 1 },
+      },
+    ],
+  },
+  {
+    id: 'q7',
+    axis: 'eu',
+    title: '컬러렌즈를 착용할 예상 빈도는 어느 정도인가요?',
+    description: '앞으로 사용할 상황을 상상해서 골라주세요.',
+    options: [
+      {
+        value: 'almost_everyday',
+        icon: '📅',
+        title: '거의 매일',
+        text: '데일리 렌즈처럼 자주 착용할 예정이에요.',
+        score: { E: 1 },
+      },
+      {
+        value: 'two_three_week',
+        icon: '🗓️',
+        title: '주 2~3회',
+        text: '일상에서도 꽤 자주 착용할 것 같아요.',
+        score: { E: 1 },
+      },
+      {
+        value: 'special_day',
+        icon: '🎀',
+        title: '특별한 날만',
+        text: '약속이나 특별한 일정에만 착용할 것 같아요.',
+        score: { U: 1 },
+      },
+      {
+        value: 'shooting_travel',
+        icon: '✈️',
+        title: '촬영이나 여행 때만',
+        text: '포인트가 필요한 순간에 착용하고 싶어요.',
+        score: { U: 1 },
+      },
+    ],
+  },
+  {
+    id: 'q8',
+    axis: 'eu',
+    title: '렌즈를 골랐을 때 더 피하고 싶은 상황은 무엇인가요?',
+    description: '렌즈 구매 실패 상황을 기준으로 골라주세요.',
+    options: [
+      {
+        value: 'too_flashy',
+        icon: '😵‍💫',
+        title: '너무 튀어서 부담스러운 것',
+        text: '과한 발색이나 존재감은 피하고 싶어요.',
+        score: { E: 1 },
+      },
+      {
+        value: 'too_obvious',
+        icon: '👀',
+        title: '렌즈 낀 티가 많이 나는 것',
+        text: '렌즈가 너무 도드라지는 건 부담스러워요.',
+        score: { E: 1 },
+      },
+      {
+        value: 'not_visible_photo',
+        icon: '📸',
+        title: '사진에서 티가 하나도 안 나는 것',
+        text: '사진에서는 렌즈 느낌이 어느 정도 보였으면 해요.',
+        score: { U: 1 },
+      },
+      {
+        value: 'no_difference',
+        icon: '🫥',
+        title: '평소와 차이가 거의 없는 것',
+        text: '착용 전후 차이가 너무 없으면 아쉬워요.',
+        score: { U: 1 },
+      },
+    ],
+  },
+
+  // C. P / K : Puppy vs Kitty
+  {
+    id: 'q9',
     axis: 'pk',
-    title: '내가 원하는 눈매 이미지는?',
-    description: '원래 얼굴형보다 연출하고 싶은 인상을 기준으로 골라주세요.',
+    title: '평소 본인의 이미지에 더 가깝다고 느끼는 쪽은 무엇인가요?',
+    description: '주변에서 듣는 인상이나 스스로 느끼는 분위기를 기준으로 골라주세요.',
     options: [
-      { value: 'P', icon: '🐶', title: 'Puppy', text: '둥글고 부드러우며 친근한 강아지상 이미지' },
-      { value: 'K', icon: '🐱', title: 'Kitty', text: '길고 또렷하며 세련된 고양이상 이미지' },
+      {
+        value: 'soft_image',
+        icon: '🐶',
+        title: '부드럽다, 순하다, 편안하다',
+        text: '친근하고 순한 분위기에 가까워요.',
+        score: { P: 1 },
+      },
+      {
+        value: 'sharp_image',
+        icon: '🐱',
+        title: '또렷하다, 세련됐다, 시크하다',
+        text: '선명하고 분위기 있는 인상에 가까워요.',
+        score: { K: 1 },
+      },
+      {
+        value: 'unknown_image',
+        icon: '？',
+        title: '잘 모르겠음',
+        text: '사진 분석 결과를 우선 반영할 수 있어요.',
+        score: {},
+      },
     ],
   },
   {
-    axis: 'lm',
-    title: '선호하는 렌즈 확대감은?',
-    description: '그래픽 직경과 또렷함을 기준으로 골라주세요.',
+    id: 'q10',
+    axis: 'pk',
+    title: '원하는 렌즈 착용 이미지는 어느 쪽에 가까운가요?',
+    description: '렌즈를 꼈을 때 연출하고 싶은 인상을 골라주세요.',
     options: [
-      { value: 'L', icon: '◉', title: 'Large', text: '확실한 확대감으로 눈동자를 또렷하게 강조' },
-      { value: 'M', icon: '○', title: 'Medium', text: '적당한 확대감으로 자연스러운 균형을 유지' },
+      {
+        value: 'clear_cute',
+        icon: '🫧',
+        title: '맑고 귀여운 느낌',
+        text: '눈빛이 맑고 사랑스러워 보였으면 해요.',
+        score: { P: 1 },
+      },
+      {
+        value: 'soft_gentle',
+        icon: '🤎',
+        title: '순하고 부드러운 느낌',
+        text: '부담 없이 편안한 인상을 원해요.',
+        score: { P: 1 },
+      },
+      {
+        value: 'clear_sharp',
+        icon: '✨',
+        title: '또렷하고 선명한 느낌',
+        text: '눈매가 더 뚜렷해 보였으면 해요.',
+        score: { K: 1 },
+      },
+      {
+        value: 'calm_mood',
+        icon: '🌙',
+        title: '차분하고 분위기 있는 느낌',
+        text: '시크하고 세련된 이미지를 원해요.',
+        score: { K: 1 },
+      },
+    ],
+  },
+  {
+    id: 'q11',
+    axis: 'pk',
+    title: '평소 선호하는 메이크업 분위기는 무엇인가요?',
+    description: '자주 하거나 좋아하는 메이크업 분위기를 골라주세요.',
+    options: [
+      {
+        value: 'natural_makeup',
+        icon: '🌿',
+        title: '내추럴',
+        text: '자연스럽고 편안한 분위기를 좋아해요.',
+        score: { P: 1 },
+      },
+      {
+        value: 'pure_makeup',
+        icon: '🫧',
+        title: '청순',
+        text: '맑고 부드러운 분위기를 좋아해요.',
+        score: { P: 1 },
+      },
+      {
+        value: 'idol_makeup',
+        icon: '🎤',
+        title: '아이돌 / 화려한 메이크업',
+        text: '눈에 띄고 선명한 스타일을 좋아해요.',
+        score: { K: 1 },
+      },
+      {
+        value: 'hip_makeup',
+        icon: '🖤',
+        title: '힙한 스타일',
+        text: '개성 있고 스타일리시한 분위기를 좋아해요.',
+        score: { K: 1 },
+      },
+      {
+        value: 'chic_shadow',
+        icon: '🌫️',
+        title: '시크한 음영 메이크업',
+        text: '차분하고 선명한 분위기를 좋아해요.',
+        score: { K: 1 },
+      },
+    ],
+  },
+  {
+    id: 'q12',
+    axis: 'pk',
+    title: '눈매 형태는 어느 쪽에 더 가깝나요?',
+    description: '잘 모르겠다면 잘 모르겠음을 선택해도 괜찮아요.',
+    options: [
+      {
+        value: 'round_eye',
+        icon: '○',
+        title: '둥근 눈매',
+        text: '눈매가 둥글고 부드러운 편이에요.',
+        score: { P: 1 },
+      },
+      {
+        value: 'down_eye',
+        icon: '⌄',
+        title: '살짝 처진 눈매',
+        text: '눈꼬리가 살짝 내려가 순한 편이에요.',
+        score: { P: 1 },
+      },
+      {
+        value: 'long_eye',
+        icon: '─',
+        title: '긴 눈매',
+        text: '가로로 길고 또렷한 편이에요.',
+        score: { K: 1 },
+      },
+      {
+        value: 'up_eye',
+        icon: '⌃',
+        title: '살짝 올라간 눈매',
+        text: '눈꼬리가 살짝 올라가 선명한 편이에요.',
+        score: { K: 1 },
+      },
+      {
+        value: 'unknown_eye_shape',
+        icon: '？',
+        title: '잘 모르겠음',
+        text: '사진 분석 결과를 우선 반영할 수 있어요.',
+        score: {},
+      },
+    ],
+  },
+
+  // D. L / M : Large vs Medium
+  {
+    id: 'q13',
+    axis: 'lm',
+    title: '선호하는 렌즈 직경은 무엇인가요?',
+    description: '눈동자가 얼마나 또렷하거나 커 보였으면 하는지 골라주세요.',
+    options: [
+      {
+        value: 'large_diameter',
+        icon: '◉',
+        title: '눈이 커 보이는 큰 직경',
+        text: '확실한 확대감과 또렷함을 원해요.',
+        score: { L: 2 },
+      },
+      {
+        value: 'balanced_diameter',
+        icon: '◐',
+        title: '자연스럽지만 살짝 또렷한 직경',
+        text: '자연스러움과 확대감을 둘 다 원해요.',
+        score: { L: 1, M: 1 },
+      },
+      {
+        value: 'natural_diameter',
+        icon: '○',
+        title: '내 눈동자와 비슷한 자연 직경',
+        text: '과하지 않고 안정적인 직경을 원해요.',
+        score: { M: 2 },
+      },
+      {
+        value: 'unknown_diameter',
+        icon: '？',
+        title: '잘 모르겠음',
+        text: '사진 분석과 훌라 경험을 함께 반영할 수 있어요.',
+        score: {},
+      },
+    ],
+  },
+  {
+    id: 'q14',
+    axis: 'lm',
+    title: '렌즈 착용 중 훌라 현상을 경험한 적이 있나요?',
+    description: '렌즈가 눈에서 따로 움직이거나 밀리는 느낌이 있었는지 골라주세요.',
+    options: [
+      {
+        value: 'no_hula',
+        icon: '👌',
+        title: '없음',
+        text: '렌즈가 비교적 안정적으로 맞았어요.',
+        score: { L: 1 },
+      },
+      {
+        value: 'sometimes_hula',
+        icon: '💧',
+        title: '가끔 있음',
+        text: '가끔 렌즈가 밀리거나 따로 노는 느낌이 있었어요.',
+        score: { M: 2 },
+      },
+      {
+        value: 'often_hula',
+        icon: '⚠️',
+        title: '자주 있음',
+        text: '착용 안정성이 중요한 편이에요.',
+        score: { M: 2 },
+      },
+      {
+        value: 'specific_hula',
+        icon: '🔍',
+        title: '특정 제품에서만 있음',
+        text: '제품에 따라 착용 안정성이 달랐어요.',
+        score: { M: 2 },
+      },
+      {
+        value: 'unknown_hula',
+        icon: '？',
+        title: '잘 모르겠음',
+        text: '이 문항은 보정 없이 넘어가요.',
+        score: {},
+      },
+    ],
+  },
+  {
+    id: 'q15',
+    axis: 'lm',
+    title: '컬러렌즈를 낄 때 가장 중요하게 생각하는 것은 무엇인가요?',
+    description: '가장 우선순위가 높은 요소를 골라주세요.',
+    options: [
+      {
+        value: 'bigger_eye',
+        icon: '👁️',
+        title: '눈이 커 보이는 효과',
+        text: '확대감이 가장 중요해요.',
+        score: { L: 1 },
+      },
+      {
+        value: 'clear_photo',
+        icon: '📸',
+        title: '사진에서 또렷해 보이는 효과',
+        text: '사진 속 존재감이 중요해요.',
+        score: { L: 1 },
+      },
+      {
+        value: 'natural_fit',
+        icon: '🌿',
+        title: '자연스러운 착용감',
+        text: '과하지 않고 편안한 느낌이 중요해요.',
+        score: { M: 1 },
+      },
+      {
+        value: 'stable_fit',
+        icon: '🫧',
+        title: '훌라 없이 안정적인 착용',
+        text: '렌즈가 눈에 잘 맞는 게 중요해요.',
+        score: { M: 1 },
+      },
+      {
+        value: 'long_comfort',
+        icon: '☁️',
+        title: '오래 껴도 편안한 느낌',
+        text: '장시간 착용 안정성이 중요해요.',
+        score: { M: 1 },
+      },
+    ],
+  },
+  {
+    id: 'q16',
+    axis: 'lm',
+    title: '기존 렌즈 구매 후 만족하지 못했던 이유가 있다면 무엇인가요?',
+    description: '가장 가까운 실패 경험을 골라주세요.',
+    options: [
+      {
+        value: 'too_small',
+        icon: '🔎',
+        title: '생각보다 눈이 작아 보임',
+        text: '확대감이 부족해서 아쉬웠어요.',
+        score: { L: 1 },
+      },
+      {
+        value: 'weak_color',
+        icon: '🌫️',
+        title: '발색이나 존재감이 약함',
+        text: '착용 전후 차이가 적어서 아쉬웠어요.',
+        score: { L: 1 },
+      },
+      {
+        value: 'too_unnatural',
+        icon: '😵‍💫',
+        title: '생각보다 부자연스러움',
+        text: '직경이나 그래픽이 부담스러웠어요.',
+        score: { M: 1 },
+      },
+      {
+        value: 'hula_problem',
+        icon: '⚠️',
+        title: '훌라 현상이 있음',
+        text: '착용 안정성이 아쉬웠어요.',
+        score: { M: 1 },
+      },
+      {
+        value: 'uncomfortable',
+        icon: '💧',
+        title: '착용감이 불편함',
+        text: '편안함과 안정성이 중요해요.',
+        score: { M: 1 },
+      },
     ],
   },
 ];
@@ -92,8 +660,9 @@ function renderQuestion() {
   const question = questions[currentQuestion];
   const progress = ((currentQuestion + 1) / questions.length) * 100;
 
-  document.querySelector('#progress-label').textContent = `${String(currentQuestion + 1).padStart(2, '0')} / 04`;
-  document.querySelector('#progress-percent').textContent = `${progress}%`;
+  document.querySelector('#progress-label').textContent =
+  `${String(currentQuestion + 1).padStart(2, '0')} / ${String(questions.length).padStart(2, '0')}`;
+  document.querySelector('#progress-percent').textContent = `${Math.round(progress)}%`;
   document.querySelector('#progress-bar').style.width = `${progress}%`;
   document.querySelector('.question-kicker').textContent = `QUESTION ${String(currentQuestion + 1).padStart(2, '0')}`;
   document.querySelector('#question-title').textContent = question.title;
@@ -101,7 +670,7 @@ function renderQuestion() {
 
   const answerGrid = document.querySelector('#answer-grid');
   answerGrid.innerHTML = question.options.map((option) => `
-    <button class="answer-card ${answers[question.axis] === option.value ? 'selected' : ''}" type="button" data-value="${option.value}">
+    <button class="answer-card ${answers[question.id] === option.value ? 'selected' : ''}" type="button" data-value="${option.value}">
       <span>${option.icon}</span>
       <strong>${option.title}</strong>
       <small>${option.text}</small>
@@ -110,7 +679,7 @@ function renderQuestion() {
 
   answerGrid.querySelectorAll('.answer-card').forEach((card) => {
     card.addEventListener('click', () => {
-      answers[question.axis] = card.dataset.value;
+      answers[question.id] = card.dataset.value;
       renderQuestion();
     });
   });
@@ -118,12 +687,55 @@ function renderQuestion() {
   const prevButton = document.querySelector('#prev-question');
   const nextButton = document.querySelector('#next-question');
   prevButton.disabled = currentQuestion === 0;
-  nextButton.disabled = !answers[question.axis];
+  nextButton.disabled = !answers[question.id];
   nextButton.textContent = currentQuestion === questions.length - 1 ? '결과 보기' : '다음';
 }
 
+function calculateScores() {
+  const scores = {
+    W: 0,
+    C: 0,
+    E: 0,
+    U: 0,
+    P: 0,
+    K: 0,
+    L: 0,
+    M: 0,
+  };
+
+  questions.forEach((question) => {
+    const selectedValue = answers[question.id];
+    const selectedOption = question.options.find((option) => option.value === selectedValue);
+
+    if (!selectedOption || !selectedOption.score) return;
+
+    Object.entries(selectedOption.score).forEach(([type, point]) => {
+      scores[type] += point;
+    });
+  });
+
+  return scores;
+}
+
+function pickType(scores, leftType, rightType, defaultType) {
+  if (scores[leftType] > scores[rightType]) return leftType;
+  if (scores[rightType] > scores[leftType]) return rightType;
+  return defaultType;
+}
+
 function getTypeCode() {
-  return `${answers.wc || 'W'}${answers.eu || 'E'}${answers.pk || 'P'}${answers.lm || 'L'}`;
+  const scores = calculateScores();
+
+  const wc = pickType(scores, 'W', 'C', 'W');
+  const eu = pickType(scores, 'E', 'U', 'E');
+  const pk = pickType(scores, 'P', 'K', 'P');
+  const lm = pickType(scores, 'L', 'M', 'M');
+
+  return `${wc}${eu}${pk}${lm}`;
+}
+
+function formatTypeCode(code) {
+  return `${code.slice(0, 3)}-${code[3]}`;
 }
 
 function updateResult() {
@@ -136,7 +748,7 @@ function updateResult() {
     code[3] === 'L' ? 'Large' : 'Medium',
   ].join(' ');
 
-  document.querySelector('#type-code').textContent = code;
+  document.querySelector('#type-code').textContent = formatTypeCode(code);
   document.querySelector('#type-full').textContent = full;
   document.querySelector('#type-name').textContent = data.name;
   document.querySelector('#type-description').textContent = data.description;
