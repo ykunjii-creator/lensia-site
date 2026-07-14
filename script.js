@@ -1,7 +1,100 @@
 const pages = {
   home: document.querySelector('#home-page'),
+  intro: document.querySelector('#intro-page'),
   quiz: document.querySelector('#quiz-page'),
   result: document.querySelector('#result-page'),
+};
+
+const introContents = {
+  main: {
+    badge: 'LPTI',
+    eyebrow: 'Lens Personality Type Indicator',
+    title: '나에게 어울리는 렌즈 취향을 찾는 방법',
+    description:
+      '네 가지 취향 축과 AI 이미지 분석을 통해 나만의 렌즈 성향을 찾습니다.',
+    visual: 'LPTI',
+    subtitle: 'LPTI는 무엇인가요?',
+    body:
+      'Warm/Cool, Everyday/Unique, Puppy/Kitty, Large/Medium의 네 가지 축을 조합해 렌즈 취향 유형을 분석합니다.',
+    keywords: [
+      'Warm / Cool',
+      'Everyday / Unique',
+      'Puppy / Kitty',
+      'Large / Medium',
+    ],
+  },
+
+  wc: {
+    badge: 'W / C',
+    eyebrow: 'Color Temperature',
+    title: 'Warm or Cool',
+    description:
+      '나에게 조화롭게 어울리는 렌즈 컬러 온도를 알아보는 축입니다.',
+    visual: 'W / C',
+    subtitle: '따뜻한 컬러와 차가운 컬러',
+    body:
+      'Warm은 브라운, 코랄, 베이지처럼 부드럽고 따뜻한 색감을 의미합니다. Cool은 그레이, 블루, 라벤더처럼 맑고 차분한 색감을 의미합니다.',
+    keywords: [
+      'Warm Brown',
+      'Coral Beige',
+      'Cool Gray',
+      'Lavender Blue',
+    ],
+  },
+
+  eu: {
+    badge: 'E / U',
+    eyebrow: 'Lens Styling',
+    title: 'Everyday or Unique',
+    description:
+      '자연스러운 데일리 렌즈와 개성 있는 포인트 렌즈 중 선호도를 분석합니다.',
+    visual: 'E / U',
+    subtitle: '매일 편안하게, 또는 특별하게',
+    body:
+      'Everyday는 일상에서 부담 없이 사용할 수 있는 자연스러운 스타일입니다. Unique는 사진, 여행, 공연처럼 특별한 순간에 분위기를 강조하는 스타일입니다.',
+    keywords: [
+      'Natural',
+      'Daily',
+      'Point Color',
+      'Statement',
+    ],
+  },
+
+  pk: {
+    badge: 'P / K',
+    eyebrow: 'Eye Impression',
+    title: 'Puppy or Kitty',
+    description:
+      '렌즈를 착용했을 때 원하는 눈매와 전체적인 인상 방향을 찾습니다.',
+    visual: 'P / K',
+    subtitle: '부드러운 눈빛과 또렷한 눈빛',
+    body:
+      'Puppy는 맑고 순하며 친근한 인상을 강조합니다. Kitty는 또렷하고 세련되며 분위기 있는 인상을 강조합니다.',
+    keywords: [
+      'Soft',
+      'Friendly',
+      'Sharp',
+      'Chic',
+    ],
+  },
+
+  lm: {
+    badge: 'L / M',
+    eyebrow: 'Graphic Diameter',
+    title: 'Large or Medium',
+    description:
+      '원하는 눈동자 확대감과 렌즈 그래픽 크기를 분석하는 축입니다.',
+    visual: 'L / M',
+    subtitle: '또렷한 확대감과 자연스러운 균형',
+    body:
+      'Large는 눈동자를 더욱 크고 선명하게 표현하는 스타일입니다. Medium은 본래 눈동자와 자연스럽게 어우러지는 균형 잡힌 스타일입니다.',
+    keywords: [
+      'Defined',
+      'Enlarging',
+      'Natural',
+      'Balanced',
+    ],
+  },
 };
 
 const navLinks = document.querySelectorAll('.nav-link[data-page]');
@@ -804,3 +897,51 @@ document.querySelectorAll('.detail-button').forEach((button) => button.addEventL
 
 const initialPage = location.hash.replace('#', '');
 showPage(['home', 'quiz', 'result'].includes(initialPage) ? initialPage : 'home');
+
+const introButtons = document.querySelectorAll('[data-intro]');
+
+const introBadge = document.querySelector('#intro-badge');
+const introEyebrow = document.querySelector('#intro-eyebrow');
+const introTitle = document.querySelector('#intro-title');
+const introDescription = document.querySelector('#intro-description');
+const introVisual = document.querySelector('#intro-visual');
+const introSubtitle = document.querySelector('#intro-subtitle');
+const introBody = document.querySelector('#intro-body');
+const introKeywords = document.querySelector('#intro-keywords');
+
+function openIntroPage(type) {
+  const content = introContents[type];
+
+  if (!content || !pages.intro) {
+    return;
+  }
+
+  introBadge.textContent = content.badge;
+  introEyebrow.textContent = content.eyebrow;
+  introTitle.textContent = content.title;
+  introDescription.textContent = content.description;
+  introVisual.textContent = content.visual;
+  introSubtitle.textContent = content.subtitle;
+  introBody.textContent = content.body;
+
+  introKeywords.innerHTML = content.keywords
+    .map((keyword) => `<span>${keyword}</span>`)
+    .join('');
+
+  Object.values(pages).forEach((page) => {
+    page?.classList.remove('active-page');
+  });
+
+  pages.intro.classList.add('active-page');
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+}
+
+introButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    openIntroPage(button.dataset.intro);
+  });
+});
