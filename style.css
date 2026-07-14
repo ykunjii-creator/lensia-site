@@ -192,6 +192,59 @@ main {
   z-index: 3;
 }
 
+.hero-visual-collage {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  height: 390px;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.hero-visual-collage .visual {
+  position: absolute;
+  display: block;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 22px rgba(75, 84, 140, 0.1));
+}
+
+/* 큰 분석 화면 */
+.analysis-image {
+  top: 10px;
+  left: 2%;
+  width: 56%;
+}
+
+/* 오른쪽 모니터 */
+.monitor-image {
+  top: 80px;
+  right: 2%;
+  width: 60%;
+}
+
+/* 아래 결과 카드 */
+.result-card {
+  bottom: 10px;
+  width: 13.5%;
+}
+
+.card-1 {
+  left: 2%;
+}
+
+.card-2 {
+  left: 17%;
+}
+
+.card-3 {
+  left: 32%;
+}
+
+.card-4 {
+  left: 47%;
+}
+
 .eyebrow {
   margin: 0 0 12px;
   color: #7776ca;
@@ -1918,7 +1971,7 @@ body {
   margin-top: 34px;
   padding: 88px 96px;
   display: grid;
-  grid-template-columns: 0.9fr 1.25fr;
+  grid-template-columns: minmax(480px, 0.9fr) minmax(620px, 1.1fr);
   align-items: center;
   gap: 48px;
   border-radius: 42px;
