@@ -9,7 +9,8 @@ const pageButtons = document.querySelectorAll('[data-page]');
 const toast = document.querySelector('#toast');
 
 const questions = [
-  // A. W / C : Warm vs Cool
+  /* A. W / C : Warm vs Cool */
+
   {
     id: 'q1',
     axis: 'wc',
@@ -39,6 +40,7 @@ const questions = [
       },
     ],
   },
+
   {
     id: 'q2',
     axis: 'wc',
@@ -68,6 +70,8 @@ const questions = [
       },
     ],
   },
+
+  /* B. E / U : Everyday vs Unique */
   {
     id: 'q3',
     axis: 'wc',
@@ -97,6 +101,8 @@ const questions = [
       },
     ],
   },
+
+  /* C. P / K : Puppy vs Kitty */
   {
     id: 'q4',
     axis: 'wc',
@@ -141,7 +147,7 @@ const questions = [
     ],
   },
 
-  // B. E / U : Everyday vs Unique
+  /* D. L / M : Large vs Medium */
   {
     id: 'q5',
     axis: 'eu',
