@@ -393,7 +393,7 @@ const questions = [
     ],
   },
 
-  // C. P / K : Puppy vs Kitty
+  /* C. P / K : Puppy vs Kitty */
   {
     id: 'q9',
     axis: 'pk',
@@ -546,7 +546,7 @@ const questions = [
     ],
   },
 
-  // D. L / M : Large vs Medium
+  /* D. L / M : Large vs Medium */
   {
     id: 'q13',
     axis: 'lm',
