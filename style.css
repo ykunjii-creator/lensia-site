@@ -2433,3 +2433,231 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================================================
+   LENSIA Unified Pastel Palette Override
+   Final palette: #FFE6FF → #E2EFFA
+========================================================= */
+
+:root {
+  --ink: #45466b;
+  --muted: #777a9b;
+  --primary: #9c91cf;
+  --primary-deep: #6f6aa8;
+  --primary-soft: #f0ecfa;
+  --pink: #e9c9e8;
+  --lavender: #cbc5e9;
+  --blue: #bfd8ea;
+  --card: rgba(255, 255, 255, 0.46);
+  --line: rgba(120, 124, 166, 0.16);
+  --shadow:
+    0 24px 64px rgba(102, 104, 150, 0.14),
+    0 8px 22px rgba(102, 104, 150, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+body {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 18%, rgba(255, 230, 255, 0.72), transparent 30%),
+    radial-gradient(circle at 90% 18%, rgba(226, 239, 250, 0.82), transparent 32%),
+    linear-gradient(135deg, #ffe6ff 0%, #f4ecfa 48%, #e2effa 100%);
+}
+
+button:focus-visible {
+  outline-color: rgba(111, 106, 168, 0.25);
+}
+
+.glass-card,
+.question-card,
+.product-card,
+.type-card,
+.topbar,
+.home-feature-card {
+  border-color: rgba(255, 255, 255, 0.78);
+  box-shadow: var(--shadow);
+}
+
+.nav-link {
+  color: #626687;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-deep);
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow:
+    0 10px 26px rgba(111, 106, 168, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.76);
+}
+
+.hero,
+.home-hero {
+  background:
+    radial-gradient(circle at 18% 34%, rgba(255, 230, 255, 0.58), transparent 35%),
+    radial-gradient(circle at 82% 34%, rgba(226, 239, 250, 0.68), transparent 38%),
+    linear-gradient(135deg, rgba(255,255,255,0.42), rgba(255,255,255,0.2));
+}
+
+.eyebrow,
+.hero-kicker {
+  color: #8582b5;
+}
+
+.hero h1,
+.hero-title {
+  color: #746caf;
+  text-shadow:
+    0 0 22px rgba(255, 230, 255, 0.58),
+    0 7px 18px rgba(93, 94, 138, 0.08);
+}
+
+.hero-description,
+.hero-desc {
+  color: #666b92;
+}
+
+.hero-cta {
+  color: #67639c;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.82), rgba(255,255,255,0.5));
+  border-color: rgba(255,255,255,0.9);
+  box-shadow:
+    0 16px 38px rgba(104, 108, 154, 0.14),
+    inset 0 0 22px rgba(255,255,255,0.78);
+}
+
+.feature-card h2,
+.home-feature-card h2,
+.quiz-header h1,
+.question-card h2,
+.section-heading h2,
+.result-topbar h2,
+.recommend-heading h2,
+.product-card h3 {
+  color: #45466b;
+}
+
+.feature-card p,
+.home-feature-card p,
+.product-card p,
+.meta,
+.recommend-heading p,
+.question-description {
+  color: #747899;
+}
+
+.feature-icon,
+.feature-symbol,
+.quiz-icon,
+.ar-icon,
+.question-kicker,
+.section-heading span,
+.save-button span,
+.type-card-top b {
+  color: #7974b3;
+}
+
+.feature-icon,
+.feature-symbol,
+.answer-card span {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.86), rgba(240,236,250,0.68));
+}
+
+.cta,
+.primary-button,
+.try-button,
+.result-action-button {
+  color: white;
+  background:
+    linear-gradient(135deg, #b8d8f2 0%, #c9c5e8 50%, #e5b9ea 100%);
+  box-shadow:
+    0 16px 36px rgba(111, 106, 168, 0.2),
+    inset 0 1px 0 rgba(255,255,255,0.42);
+}
+
+.ghost-button,
+.secondary-button,
+.detail-button,
+.save-button {
+  color: #64658f;
+  border-color: rgba(111, 106, 168, 0.14);
+}
+
+.progress-track {
+  background: rgba(255,255,255,0.52);
+}
+
+.progress-track span {
+  background:
+    linear-gradient(90deg, #b8d8f2 0%, #cbc5e9 50%, #e5b9ea 100%);
+}
+
+.answer-card {
+  color: #45466b;
+}
+
+.answer-card:hover {
+  border-color: rgba(156, 145, 207, 0.42);
+}
+
+.answer-card.selected {
+  border-color: #a59bd1;
+  background:
+    linear-gradient(135deg, rgba(255,230,255,0.68), rgba(226,239,250,0.68));
+  box-shadow:
+    0 16px 34px rgba(111, 106, 168, 0.14),
+    inset 0 0 18px rgba(255,255,255,0.72);
+}
+
+.guide-card {
+  color: #686b8c;
+}
+
+.guide-card span {
+  background: #8f8abe;
+}
+
+.type-card {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.6), rgba(241,238,249,0.42));
+}
+
+.type-card-top span,
+.best-label {
+  color: white;
+  background:
+    linear-gradient(135deg, #9f9acb, #c9a9cf);
+}
+
+.type-card > strong,
+.type-card h3,
+.axis-row {
+  color: #4d4f78;
+}
+
+.type-card > small {
+  color: #777a9b;
+}
+
+.result-action-button,
+.best-label {
+  box-shadow:
+    0 10px 22px rgba(111, 106, 168, 0.18);
+}
+
+.feature-tags span {
+  color: #77749c;
+}
+
+.feature-arrow {
+  color: #6d69a5;
+}
+
+.toast {
+  background: rgba(69, 70, 107, 0.9);
+}
