@@ -944,7 +944,7 @@ function openIntroPage(type) {
         type="button"
         data-page="home"
       >
-        ← 홈으로
+        홈으로
       </button>
 
       <div class="intro-heading">
@@ -1010,11 +1010,15 @@ function openIntroPage(type) {
       </div>
 
       <button
-        class="intro-test-button"
+        class="intro-test-button cta"
         type="button"
         data-page="quiz"
       >
-        테스트 시작하기 →
+        <span>✦</span>
+
+        <strong>테스트 시작하기</strong>
+
+        <b>›</b>
       </button>
     </div>
   `;

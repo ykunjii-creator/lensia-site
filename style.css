@@ -9,6 +9,17 @@
   --shadow: 0 18px 42px rgba(89, 78, 117, 0.14), 0 5px 12px rgba(89, 78, 117, 0.08);
 }
 
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2")
+    format("woff2");
+  font-weight: 100;
+  font-style: Normal;
+  font-display: swap;
+}
+
+/* 나머지 200~900 동일 */
+
 * {
   box-sizing: border-box;
 }
@@ -21,7 +32,12 @@ body {
   margin: 0;
   min-height: 100vh;
   color: var(--ink);
-  font-family: "Noto Sans KR", sans-serif;
+  font-family:
+    "Pretendard",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 
   background: linear-gradient(
     135deg,
@@ -200,7 +216,7 @@ main {
   width: 100%;
   max-width: 640px;
   height: 500px;
-  margin: 0 auto;
+  margin: 0px auto;
 }
 
 /* 분석 패널 */
@@ -208,7 +224,7 @@ main {
   position: absolute;
   width: 110%;
   height: auto;
-  top: -120px;
+  top: -110px;
   transform: translateX(-14%);
   object-fit: contain;
   filter: drop-shadow(0 14px 28px rgba(75, 84, 140, 0.1));
@@ -220,7 +236,7 @@ main {
   width: 140%;
   gap: 0px;
   left: 40%;
-  bottom: -90px;
+  bottom: -95px;
   transform: translateX(-50%);
 
   display: grid;
@@ -531,7 +547,7 @@ main {
 .ghost-button,
 .secondary-button,
 .primary-button {
-  border-radius: 18px;
+  border-radius: 50px;
   padding: 14px 24px;
   font-weight: 800;
   cursor: pointer;
@@ -1561,7 +1577,15 @@ body {
 /* 8. 버튼류 */
 .cta,
 .primary-button,
-.try-button,
+.try-button {
+  color: white;
+  background:
+    linear-gradient(135deg, #ff9fd9 0%, #b894ff 50%, #8ed8ff 100%);
+  box-shadow:
+    0 16px 38px rgba(159, 121, 226, 0.28),
+    inset 0 1px 0 rgba(255,255,255,0.38);
+}
+
 .result-action-button {
   color: white;
   background:
@@ -1571,6 +1595,7 @@ body {
     inset 0 1px 0 rgba(255,255,255,0.38);
 }
 
+
 .cta {
   border-radius: 999px;
   min-height: 88px;
@@ -1578,7 +1603,11 @@ body {
 
 .cta:hover,
 .primary-button:hover,
-.try-button:hover,
+.try-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
 .result-action-button:hover {
   transform: translateY(-2px);
   filter: brightness(1.04);
@@ -1963,7 +1992,7 @@ body {
 
 .home-hero {
   position: relative;
-  min-height: 560px;
+  min-height: 610px;
   margin-top: 34px;
   padding: 88px 96px;
   display: grid;
@@ -2036,38 +2065,62 @@ body {
   width: 300px;
   height: 78px;
   padding: 0 30px;
+
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  border-radius:500px;
 
-  color: #444444;
+  box-sizing: border-box;
+  border-radius: 999px;
+
+  color: var(--text-primary);
   font-size: 23px;
   font-weight: 700;
+  line-height: 1;
 
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0.38));
-  border: 1px solid rgba(255,255,255,0.86);
+  /* ghost-button과 동일 */
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+
   box-shadow:
-    0 18px 42px rgba(139, 105, 188, 0.16),
-    inset 0 0 22px rgba(255,255,255,0.74);
+    0 10px 26px rgba(121, 98, 168, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
 
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
   cursor: pointer;
-  transition: 0.22s ease;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .hero-cta:hover {
-  transform: translateY(-3px);
+  /* ghost-button hover와 동일 */
+  color: #6f6aa8;
+  background: rgba(255, 255, 255, 0.82);
+
+  border-color: rgba(255, 255, 255, 0.82);
+
   box-shadow:
-    0 24px 54px rgba(139, 105, 188, 0.22),
-    inset 0 0 26px rgba(255,255,255,0.82);
+    0 10px 24px rgba(111, 106, 168, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+
+  transform: translateY(-2px);
 }
 
-.hero-cta b {
+.hero-cta > span {
+  white-space: nowrap;
+}
+
+.hero-cta > b {
   font-size: 34px;
   font-weight: 400;
+  line-height: 1;
 }
 
 /* 오른쪽 비주얼 영역 */
@@ -2520,16 +2573,6 @@ button:focus-visible {
   color: #666666;
 }
 
-.hero-cta {
-  color: #666666;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.82), rgba(255,255,255,0.5));
-  border-color: rgba(255,255,255,0.9);
-  box-shadow:
-    0 16px 38px rgba(104, 108, 154, 0.14),
-    inset 0 0 22px rgba(255,255,255,0.78);
-}
-
 .feature-card h2,
 .home-feature-card h2,
 .quiz-header h1,
@@ -2548,6 +2591,26 @@ button:focus-visible {
 .recommend-heading p,
 .question-description {
   color: #747899;
+}
+
+.feature-image-box {
+  width: 130px;
+  height: 130px;
+  flex: 0 0 130px;
+
+  background: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.feature-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
 }
 
 .feature-icon,
@@ -2692,28 +2755,55 @@ button:focus-visible {
   border-radius: 42px;
 }
 
+.intro-heading {
+  margin-top: 0px;
+}
+
 .intro-back-button {
-  padding: 12px 20px;
-  border: none;
+  transform: translateY(-12px);
+  width: 92px;
+  height: 46px;
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  border: 1px solid transparent;
   border-radius: 999px;
-  color: #676a92;
-  background: rgba(255, 255, 255, 0.58);
+
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.42);
+
+  font-size: 16px;
   font-weight: 700;
-  cursor: pointer;
+  line-height: 1;
+
   box-shadow:
-    0 10px 26px rgba(111, 106, 168, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    0 8px 20px rgba(111, 106, 168, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.48);
+
+  cursor: pointer;
+
+  transition:
+    color 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
 }
 
 .intro-back-button:hover {
-  border: none;
-  transform: translateY(-2px);
-
-  background: rgba(255, 255, 255, 0.7);
+  color: var(--text-accent);
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(255, 255, 255, 0.94);
 
   box-shadow:
-    0 14px 32px rgba(111, 106, 168, 0.2),
+    0 12px 26px rgba(111, 106, 168, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.82);
+
+  transform: translateY(-14px);
 }
 
 .intro-heading {
@@ -2776,9 +2866,8 @@ button:focus-visible {
   width: 120%;
   height: 100%;
   object-fit: contain;
-  transform: translateX(30px);
+  transform: translate(30px, 0);
   border-radius: 32px;
-
   filter:
     drop-shadow(0 18px 36px rgba(111, 106, 168, 0.16));
 }
@@ -2862,6 +2951,34 @@ button:focus-visible {
   cursor: pointer;
   box-shadow:
     0 16px 36px rgba(111, 106, 168, 0.2);
+}
+
+.intro-test-button.cta {
+  width: 420px;
+  min-height: 78px;
+  margin: 56px auto 0;
+  padding: 0 28px;
+  border-radius: 999px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.intro-test-button.cta > span {
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.intro-test-button.cta > b {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.intro-test-button.cta > strong {
+  font-size: 23px;
+  font-weight: 600;
 }
 
 @media (max-width: 920px) {
@@ -3161,5 +3278,24 @@ body {
 .intro-visual-lm {
   width: 280px;
   margin-left: 120px;
+}
 
+.ghost-button,
+.secondary-button {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.ghost-button:hover,
+.secondary-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.82);
+  color: #6f6aa8;
+
+  box-shadow:
+    0 10px 24px rgba(111, 106, 168, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
 }
