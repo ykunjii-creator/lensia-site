@@ -2755,16 +2755,16 @@ button:focus-visible {
   max-width: 1120px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 360px 1fr;
+  grid-template-columns: 430px 1fr;
   align-items: center;
-  gap: 64px;
+  gap: 100px;
 }
 
 .intro-visual {
   display: flex;
   align-items: center;
   justify-content: center;
-
+  transform: translateX(-40px);
   background: transparent;
   box-shadow: none;
   padding: 0;
@@ -2773,10 +2773,10 @@ button:focus-visible {
 
 .intro-visual img {
   display: block;
-  width: 100%;
+  width: 120%;
   height: 100%;
   object-fit: contain;
-
+  transform: translateX(30px);
   border-radius: 32px;
 
   filter:
@@ -2797,7 +2797,7 @@ button:focus-visible {
 
 .intro-keywords {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
   margin-top: 28px;
 }
@@ -2809,6 +2809,34 @@ button:focus-visible {
   background: rgba(255, 255, 255, 0.62);
   border: 1px solid rgba(255, 255, 255, 0.82);
   font-weight: 700;
+  white-space: nowrap;
+}
+
+.intro-keyword-button {
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 999px;
+
+  color: #676a92;
+  background: rgba(255, 255, 255, 0.62);
+
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.intro-keyword-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 8px 18px rgba(111, 106, 168, 0.14);
 }
 
 .intro-test-button {
@@ -2857,4 +2885,281 @@ button:focus-visible {
   .intro-keywords {
     justify-content: center;
   }
+}
+
+/* =========================================================
+   LENSIA Unified Typography Color System
+   텍스트 컬러만 용도별로 통일한 최종 오버라이드
+========================================================= */
+
+:root {
+  /* 핵심 텍스트 */
+  --text-primary: #51536B;      /* 메인 제목, 핵심 정보 */
+  --text-secondary: #686B7D;    /* 본문, 설명 */
+  --text-muted: #838697;        /* 보조 설명, 작은 글씨 */
+  --text-accent: #7772A8;       /* 라벨, 진행 표시, 강조 */
+  --text-on-color: #FFFFFF;     /* 그라데이션 버튼 위 글자 */
+  --text-soft-white: rgba(255, 255, 255, 0.94);
+
+  /* 기존 변수도 같은 체계로 연결 */
+  --ink: var(--text-primary);
+  --muted: var(--text-secondary);
+  --primary-deep: var(--text-accent);
+}
+
+/* 전체 기본 글자 */
+body {
+  color: var(--text-primary);
+}
+
+/* 상단 내비게이션 */
+.nav-link {
+  color: var(--text-primary);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-accent);
+}
+
+/* 홈 화면: 작은 영문 라벨 */
+.hero-kicker,
+.eyebrow {
+  color: var(--text-accent);
+}
+
+/* 홈 화면: 메인 제목 */
+.hero-title,
+.hero h1 {
+  color: var(--text-primary);
+}
+
+/* 홈 화면: 설명 */
+.hero-desc,
+.hero-description {
+  color: var(--text-secondary);
+}
+
+/* 홈 화면: 시작 버튼 */
+.hero-cta {
+  color: var(--text-primary);
+}
+
+/* 기능 카드 */
+.feature-card h2,
+.home-feature-card h2 {
+  color: var(--text-primary);
+}
+
+.feature-card p,
+.home-feature-card p {
+  color: var(--text-secondary);
+}
+
+.feature-icon,
+.feature-symbol,
+.quiz-icon,
+.ar-icon {
+  color: var(--text-accent);
+}
+
+/* 하단 안내 */
+.guide-card {
+  color: var(--text-secondary);
+}
+
+.guide-card span {
+  color: var(--text-on-color);
+}
+
+.guide-card b {
+  color: var(--text-muted);
+}
+
+/* 테스트 페이지 제목 */
+.quiz-header h1,
+.question-card h2 {
+  color: var(--text-primary);
+}
+
+.question-kicker,
+.progress-meta {
+  color: var(--text-accent);
+}
+
+.question-description {
+  color: var(--text-secondary);
+}
+
+/* 답변 카드 */
+.answer-card {
+  color: var(--text-primary);
+}
+
+.answer-card strong {
+  color: var(--text-primary);
+}
+
+.answer-card small {
+  color: var(--text-secondary);
+}
+
+/* 보조 버튼 */
+.ghost-button,
+.secondary-button,
+.detail-button,
+.save-button {
+  color: var(--text-primary);
+}
+
+/* 메인 그라데이션 버튼 */
+.cta,
+.primary-button,
+.try-button,
+.result-action-button,
+.intro-test-button {
+  color: var(--text-on-color);
+}
+
+/* CTA 내부 텍스트 */
+.cta strong,
+.cta small,
+.result-action-button {
+  color: var(--text-on-color);
+}
+
+/* 결과 페이지: 섹션 제목 */
+.section-heading h2,
+.result-topbar h2,
+.recommend-heading h2,
+.iris-panel h3 {
+  color: var(--text-primary);
+}
+
+.section-heading span,
+.save-button span {
+  color: var(--text-accent);
+}
+
+/* 홍채 분석 */
+.swatches span {
+  color: var(--text-on-color);
+}
+
+.bar-track b,
+.bar-row > span {
+  color: var(--text-primary);
+}
+
+/* LPTI 결과 카드 */
+.type-card-top span {
+  color: var(--text-on-color);
+}
+
+.type-card-top b {
+  color: var(--text-accent);
+}
+
+.type-card > strong,
+.type-card h3 {
+  color: var(--text-primary);
+}
+
+.type-card > small {
+  color: var(--text-muted);
+}
+
+/* 축 라벨 */
+.axis-row {
+  color: var(--text-primary);
+}
+
+/* 추천 렌즈 */
+.recommend-heading p {
+  color: var(--text-secondary);
+}
+
+.product-card h3 {
+  color: var(--text-primary);
+}
+
+.product-card p,
+.meta {
+  color: var(--text-secondary);
+}
+
+.best-label {
+  color: var(--text-on-color);
+}
+
+/* 저장 버튼 작은 설명 */
+.save-button b {
+  color: var(--text-primary);
+}
+
+.save-button small {
+  color: var(--text-muted);
+}
+
+/* 소개 페이지 */
+.intro-back-button {
+  color: var(--text-secondary);
+}
+
+#intro-badge {
+  color: var(--text-accent);
+}
+
+#intro-eyebrow {
+  color: var(--text-accent);
+}
+
+#intro-title,
+.intro-detail h2 {
+  color: var(--text-primary);
+}
+
+#intro-description,
+.intro-detail p {
+  color: var(--text-secondary);
+}
+
+.intro-keywords span,
+.feature-tags span {
+  color: var(--text-secondary);
+}
+
+.feature-arrow {
+  color: var(--text-accent);
+}
+
+/* 토스트 */
+.toast {
+  color: var(--text-on-color);
+}
+
+/* 비주얼 내부 텍스트 */
+.panel-label,
+.kiosk-screen {
+  color: var(--text-soft-white);
+}
+
+.device small,
+.device strong {
+  color: var(--text-accent);
+}
+
+/* 메인 LPTI 소개 이미지는 크게 */
+.intro-visual-main {
+  width: 430px;
+}
+
+/* 세부 축 카드 이미지는 작게 */
+.intro-visual-wc,
+.intro-visual-eu,
+.intro-visual-pk,
+.intro-visual-lm {
+  width: 280px;
+  margin-left: 120px;
+
 }

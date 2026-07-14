@@ -9,7 +9,7 @@ const introContents = {
   main: {
     badge: 'LPTI',
     eyebrow: 'Lens Personality Type Indicator',
-    title: '나에게 어울리는<br>렌즈 취향을 찾는 방법',
+    title: 'LPTI',
     description:
       '네 가지 취향 축과 AI 이미지 분석을 통해 나만의 렌즈 성향을 찾습니다.',
     visual:  'assets/analysis-panel.png',
@@ -964,7 +964,7 @@ function openIntroPage(type) {
       </div>
 
       <div class="intro-content">
-        <div class="intro-visual" id="intro-visual">
+        <div class="intro-visual intro-visual-${type}" id="intro-visual">
           <img
             src="${content.visual}"
             alt="${content.badge} 소개 이미지"
@@ -982,7 +982,28 @@ function openIntroPage(type) {
 
           <div class="intro-keywords" id="intro-keywords">
             ${content.keywords
-              .map((keyword) => `<span>${keyword}</span>`)
+              .map((keyword) => {
+                const introMap = {
+                  'Warm / Cool': 'wc',
+                  'Everyday / Unique': 'eu',
+                  'Puppy / Kitty': 'pk',
+                  'Large / Medium': 'lm',
+                };
+
+                const target = introMap[keyword];
+
+                return target
+                  ? `
+                    <button
+                      type="button"
+                      class="intro-keyword-button"
+                      data-intro-target="${target}"
+                    >
+                      ${keyword}
+                    </button>
+                  `
+                  : `<span>${keyword}</span>`;
+              })
               .join('')}
           </div>
         </div>
@@ -1003,6 +1024,14 @@ function openIntroPage(type) {
   introRoot.querySelectorAll('[data-page]').forEach((button) => {
     button.addEventListener('click', () => {
       showPage(button.dataset.page);
+    });
+  });
+
+  introRoot
+  .querySelectorAll('[data-intro-target]')
+  .forEach((button) => {
+    button.addEventListener('click', () => {
+      openIntroPage(button.dataset.introTarget);
     });
   });
 }
