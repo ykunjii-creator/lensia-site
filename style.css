@@ -192,62 +192,44 @@ main {
   z-index: 3;
 }
 
-/* 홈 오른쪽 이미지 배치 최종 조정 */
+
+
 .hero-visual-collage {
   position: relative;
   width: 100%;
-  max-width: 720px;
-  height: 420px;
+  max-width: 620px;
+  height: 500px;
   margin: 0 auto;
-  flex-shrink: 0;
 }
 
-/* 공통 이미지 설정 */
-.hero-visual-collage .visual {
-  position: absolute;
-  display: block;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 14px 28px rgba(75, 84, 140, 0.1));
-}
-
-/* 홍채 분석 패널 */
 .analysis-image {
-  top: 18px;
-  left: 0;
-  width: 55%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72%;
   z-index: 1;
 }
 
-/* 오른쪽 모니터 */
-.monitor-image {
-  top: 76px;
-  right: 0;
-  width: 42%;
+.result-card {
+  bottom: 0;
+  width: 21%;
   z-index: 2;
 }
 
-/* 아래 카드 4장 */
-.result-card {
-  bottom: 8px;
-  width: 14%;
-  z-index: 3;
-}
-
 .card-1 {
-  left: 0;
+  left: 2%;
 }
 
 .card-2 {
-  left: 15.5%;
+  left: 27%;
 }
 
 .card-3 {
-  left: 31%;
+  left: 52%;
 }
 
 .card-4 {
-  left: 46.5%;
+  left: 77%;
 }
 
 .eyebrow {
