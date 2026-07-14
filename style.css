@@ -1371,13 +1371,6 @@ body {
     inset 0 0 28px rgba(255, 255, 255, 0.48);
 }
 
-.brand-logo {
-  width: 300px;
-  filter:
-    drop-shadow(0 8px 18px rgba(166, 122, 210, 0.16))
-    saturate(1.08);
-}
-
 .nav {
   gap: 36px;
 }
@@ -1898,10 +1891,6 @@ body {
     padding: 0 34px;
   }
 
-  .brand-logo {
-    width: 260px;
-  }
-
   .nav {
     gap: 14px;
   }
@@ -1923,10 +1912,6 @@ body {
   .topbar {
     height: 76px;
     border-radius: 26px;
-  }
-
-  .brand-logo {
-    width: 210px;
   }
 
   .hero {
@@ -1956,9 +1941,6 @@ body {
 }
 
 @media (max-width: 560px) {
-  .brand-logo {
-    width: 180px;
-  }
 
   .hero {
     border-radius: 28px;
@@ -2750,6 +2732,8 @@ button:focus-visible {
 }
 
 .intro-page-card {
+  position: relative;
+  padding-top: 36px;
   min-height: 720px;
   padding: 72px 84px;
   border-radius: 42px;
@@ -2760,7 +2744,10 @@ button:focus-visible {
 }
 
 .intro-back-button {
-  transform: translateY(-12px);
+  position: absolute;
+  top: 64px;
+  left: 84px;
+  transform: none;
   width: 92px;
   height: 46px;
   padding: 0;
@@ -2803,7 +2790,8 @@ button:focus-visible {
     0 12px 26px rgba(111, 106, 168, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.82);
 
-  transform: translateY(-14px);
+  transform: translateY(-2px);
+    
 }
 
 .intro-heading {
@@ -3298,4 +3286,21 @@ body {
   box-shadow:
     0 10px 24px rgba(111, 106, 168, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+
+.brand-logo {
+  width: 240px !important;
+  height: auto;
+}
+
+@media (max-width: 920px) {
+  .brand-logo {
+    width: 200px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand-logo {
+    width: 170px !important;
+  }
 }
