@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="나의 렌즈 취향을 찾는 LPTI 키오스크" />
   <title>LENSIA | LPTI Kiosk</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/result.css" />
 </head>
 <body>
   <div class="page-shell">
@@ -234,7 +236,7 @@
           <section class="lpti-panel glass-card">
             <div class="result-topbar">
               <h2>나의 LPTI</h2>
-              <button class="save-button" type="button"><span>▦</span><b>결과 저장</b><small>QR로 저장하기</small></button>
+              <button class="save-button" type="button">결과 저장</button>
             </div>
 
             <div class="result-summary">
@@ -297,6 +299,7 @@
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="script.js"></script>
+  <script src="./js/script.js"></script>
+  <script src="./js/result.js"></script>
 </body>
 </html>
