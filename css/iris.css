@@ -770,3 +770,51 @@
     padding: 16px;
   }
 }
+
+.iris-button-image {
+  display: block;
+  width: 46px;
+  height: 46px;
+  padding: 8px;
+  object-fit: contain;
+
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.66);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+
+@media (max-width: 620px) {
+  .iris-button-image {
+    width: 42px;
+    height: 42px;
+    padding: 7px;
+  }
+}
+
+.iris-guide-icon-image {
+  display: block;
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  object-fit: contain;
+}
+
+.iris-preview-empty-image {
+  display: block;
+  width: min(48%, 180px);
+  height: auto;
+  margin: 0 auto 22px;
+  object-fit: contain;
+
+  filter: drop-shadow(
+    0 12px 24px rgba(111, 106, 168, 0.1)
+  );
+}
+
+@media (max-width: 760px) {
+  .iris-preview-empty-image {
+    width: 130px;
+    margin-bottom: 18px;
+  }
+}
