@@ -2,6 +2,7 @@ const pages = {
   home: document.querySelector('#home-page'),
   intro: document.querySelector('#intro-page'),
   quiz: document.querySelector('#quiz-page'),
+  iris: document.querySelector("#iris-page"),
   result: document.querySelector('#result-page'),
 };
 
@@ -726,8 +727,16 @@ function showPage(name) {
 
   pages[name]?.classList.add('active-page');
 
+  const activeNavPage =
+  name === "iris"
+    ? "quiz"
+    : name;
+
   navLinks.forEach((link) => {
-    link.classList.toggle('active', link.dataset.page === name);
+    link.classList.toggle(
+      "active",
+      link.dataset.page === activeNavPage
+    );
   });
 
   introNavLink?.classList.toggle('active', name === 'intro');
@@ -742,6 +751,8 @@ function showPage(name) {
 
   history.replaceState(null, '', `#${name}`);
 }
+
+window.showPage = showPage;
 
 function showToast(message) {
   toast.textContent = message;
@@ -782,7 +793,10 @@ function renderQuestion() {
   const nextButton = document.querySelector('#next-question');
   prevButton.disabled = currentQuestion === 0;
   nextButton.disabled = !answers[question.id];
-  nextButton.textContent = currentQuestion === questions.length - 1 ? '결과 보기' : '다음';
+  nextButton.textContent =
+  currentQuestion === questions.length - 1
+  ? '다음 단계'
+  : '다음';
 }
 
 function calculateScores() {
@@ -851,7 +865,7 @@ document.querySelector('#next-question')?.addEventListener('click', () => {
     currentQuestion += 1;
     renderQuestion();
   } else {
-    showPage('result');
+    showPage('iris');
   }
 });
 
@@ -871,7 +885,7 @@ if (initialPage === 'intro') {
   openIntroPage('main');
 } else {
   showPage(
-    ['home', 'quiz', 'result'].includes(initialPage)
+    ['home', 'quiz', 'iris', 'result'].includes(initialPage)
       ? initialPage
       : 'home'
   );

@@ -2788,3 +2788,44 @@ body {color: var(--text-primary);}
   }
 }
 
+/* =========================================================
+   TOPBAR RESPONSIVE FINAL
+   화면이 줄어들어도 기존 상단 메뉴 유지
+========================================================= */
+
+@media (max-width: 920px) {
+  .topbar {
+    height: 78px;
+    padding: 0 22px;
+    gap: 16px;
+    flex-wrap: nowrap;
+  }
+
+  .brand {
+    flex: 0 0 auto;
+  }
+
+  .brand-logo {
+    width: 180px !important;
+  }
+
+  .nav {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .nav-link {
+    flex: 0 0 auto;
+    padding: 10px 8px;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .mobile-menu {
+    display: none !important;
+  }
+}

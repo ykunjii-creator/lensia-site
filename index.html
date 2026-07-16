@@ -7,7 +7,9 @@
   <title>LENSIA | LPTI Kiosk</title>
 
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/iris.css" />
   <link rel="stylesheet" href="./css/result.css" />
+
 </head>
 <body>
   <div class="page-shell">
@@ -23,12 +25,10 @@
       <nav class="nav" aria-label="주요 메뉴">
         <button class="nav-link active" data-page="home">홈</button>
         <button class="nav-link" type="button" data-intro="main">LPTI 소개</button>
-        <button class="nav-link" data-page="quiz">테스트</button>
-        <button class="nav-link" data-page="result">추천 렌즈</button>
-        <button class="nav-link" data-scroll="guide">이용 안내</button>
+        <button class="nav-link" data-page="quiz">진단하기</button>
+        <button class="nav-link" data-page="result">결과보기</button>
       </nav>
 
-      <button class="mobile-menu" type="button" aria-label="모바일 메뉴 열기">☰</button>
     </header>
 
     <main>
@@ -220,6 +220,221 @@
         </section>
       </section>
 
+      <!-- =====================================================
+          홍채 이미지 분석 페이지
+          LPTI 설문 완료 후 표시되는 진단하기 두 번째 단계
+      ===================================================== -->
+      <section id="iris-page" class="page">
+        <section class="iris-analysis-shell glass-card">
+
+          <div class="iris-analysis-header">
+            <div>
+              <p class="iris-eyebrow">IRIS ANALYSIS</p>
+              <h1>홍채 이미지 분석</h1>
+              <p class="iris-header-description">
+                눈 이미지 분석을 통해 홍채 컬러와 눈동자 비율을 확인하고<br />
+                나에게 더욱 잘 어울리는 렌즈를 추천해 드려요.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="iris-home-button ghost-button"
+              data-page="home"
+            >
+              처음으로
+            </button>
+          </div>
+
+          <div class="iris-analysis-content">
+
+            <!-- 왼쪽: 업로드 방법 -->
+            <section class="iris-control-panel">
+              <div class="iris-step-heading">
+                <span class="iris-step-number">01</span>
+
+                <div>
+                  <h2>눈 이미지를 준비해 주세요</h2>
+                  <p>
+                    정면에서 촬영한 선명한 눈 사진을 사용하면<br />
+                    더욱 정확한 분석 결과를 확인할 수 있어요.
+                  </p>
+                </div>
+              </div>
+
+              <div class="iris-button-group">
+                <button
+                  id="iris-camera-button"
+                  class="iris-main-button iris-camera-button"
+                  type="button"
+                >
+                  <span class="iris-button-icon">⌁</span>
+
+                  <span class="iris-button-copy">
+                    <strong>카메라로 촬영하기</strong>
+                    <small>기기의 카메라로 눈 사진을 촬영해요</small>
+                  </span>
+
+                  <span class="iris-button-arrow">›</span>
+                </button>
+
+                <button
+                  id="iris-upload-button"
+                  class="iris-main-button iris-upload-button"
+                  type="button"
+                >
+                  <span class="iris-button-icon">⇧</span>
+
+                  <span class="iris-button-copy">
+                    <strong>이미지 업로드하기</strong>
+                    <small>저장된 눈 사진을 불러와요</small>
+                  </span>
+
+                  <span class="iris-button-arrow">›</span>
+                </button>
+              </div>
+
+              <!-- 일반 이미지 업로드 -->
+              <input
+                id="iris-file-input"
+                type="file"
+                accept="image/*"
+                hidden
+              />
+
+              <!-- 카메라 촬영용 -->
+              <input
+                id="iris-camera-input"
+                type="file"
+                accept="image/*"
+                capture="environment"
+                hidden
+              />
+
+              <div class="iris-file-status" aria-live="polite">
+                <span id="iris-file-status-icon">○</span>
+                <p id="iris-file-status-text">
+                  아직 선택된 이미지가 없어요.
+                </p>
+              </div>
+
+              <div class="iris-control-actions">
+                <button
+                  id="iris-analyze-button"
+                  class="iris-analyze-button"
+                  type="button"
+                  disabled
+                >
+                  <span id="iris-analyze-button-text">홍채 이미지 분석하기</span>
+                  <b>›</b>
+                </button>
+
+                <button
+                  id="iris-skip-button"
+                  class="iris-skip-button"
+                  type="button"
+                >
+                  홍채 분석 없이 결과보기
+                </button>
+              </div>
+            </section>
+
+            <!-- 오른쪽: 미리보기 -->
+            <section class="iris-preview-panel">
+              <div class="iris-preview-heading">
+                <div>
+                  <span>✦</span>
+                  <strong>미리보기</strong>
+                </div>
+
+                <button
+                  id="iris-remove-button"
+                  class="iris-remove-button"
+                  type="button"
+                  hidden
+                >
+                  이미지 삭제
+                </button>
+              </div>
+
+              <div id="iris-preview-box" class="iris-preview-box">
+                <img
+                  id="iris-preview-image"
+                  class="iris-preview-image"
+                  alt="선택한 눈 이미지 미리보기"
+                  hidden
+                />
+
+                <div
+                  id="iris-preview-placeholder"
+                  class="iris-preview-placeholder"
+                >
+                  <div class="iris-placeholder-eye">
+                    <span class="iris-placeholder-pupil"></span>
+                  </div>
+
+                  <strong>눈 이미지 미리보기</strong>
+                  <p>
+                    카메라로 촬영하거나<br />
+                    이미지를 업로드해 주세요.
+                  </p>
+                </div>
+
+                <div class="iris-scan-corner iris-scan-corner-top-left"></div>
+                <div class="iris-scan-corner iris-scan-corner-top-right"></div>
+                <div class="iris-scan-corner iris-scan-corner-bottom-left"></div>
+                <div class="iris-scan-corner iris-scan-corner-bottom-right"></div>
+
+                <div
+                  id="iris-analysis-loading"
+                  class="iris-analysis-loading"
+                  hidden
+                >
+                  <span class="iris-loading-circle"></span>
+                  <strong>홍채 이미지를 분석하고 있어요</strong>
+                  <p>잠시만 기다려 주세요.</p>
+                </div>
+              </div>
+
+              <p class="iris-preview-note">
+                눈을 정면으로 바라보고 홍채가 선명하게 보이는 이미지를 사용해 주세요.
+              </p>
+            </section>
+          </div>
+
+          <!-- 아래 촬영 가이드 -->
+          <section class="iris-guide-list">
+            <article class="iris-guide-item">
+              <span class="iris-guide-icon">☼</span>
+
+              <div>
+                <strong>밝은 곳에서 촬영해 주세요</strong>
+                <p>눈동자 색이 선명하게 보이는 환경이 좋아요.</p>
+              </div>
+            </article>
+
+            <article class="iris-guide-item">
+              <span class="iris-guide-icon">◉</span>
+
+              <div>
+                <strong>눈동자를 정면에 맞춰 주세요</strong>
+                <p>카메라를 바라보고 눈을 자연스럽게 떠 주세요.</p>
+              </div>
+            </article>
+
+            <article class="iris-guide-item">
+              <span class="iris-guide-icon">✦</span>
+
+              <div>
+                <strong>필터 없는 이미지를 사용해 주세요</strong>
+                <p>뷰티 필터와 컬러 보정은 분석 결과에 영향을 줄 수 있어요.</p>
+              </div>
+            </article>
+          </section>
+
+        </section>
+      </section>
+
       <section id="result-page" class="page">
         <section class="result-layout">
           <aside class="iris-panel glass-card">
@@ -313,6 +528,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="./js/script.js"></script>
+  <script src="./js/iris.js"></script>
   <script src="./js/result.js"></script>
 </body>
 </html>
