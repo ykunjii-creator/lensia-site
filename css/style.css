@@ -2829,3 +2829,352 @@ body {color: var(--text-primary);}
     display: none !important;
   }
 }
+
+/* =========================================================
+   TOPBAR RESPONSIVE — 540px 이하
+   로고와 메뉴 글씨가 겹치지 않도록 로고를 비율로 축소
+========================================================= */
+
+@media (max-width: 540px) {
+  .topbar {
+    height: 64px;
+    padding: 0 14px;
+    gap: 8px;
+  }
+
+  .brand-logo {
+    width: clamp(84px, 30vw, 150px) !important;
+  }
+
+  .nav {
+    gap: 4px;
+  }
+
+  .nav-link {
+    padding: 8px 6px;
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   LPTI INTRO PAGE — FINAL RESPONSIVE FIX
+   - 메인 LPTI 이미지와 세부 축 카드 4개 모두 가운데 정렬
+   - 1300px 이하부터 이미지 위 / 설명 아래 1열 배치
+   - 설명, 키워드가 화면 밖으로 잘리는 현상 방지
+========================================================= */
+
+.intro-page-card,
+.intro-heading,
+.intro-content,
+.intro-visual,
+.intro-detail,
+.intro-keywords {
+  min-width: 0;
+}
+
+.intro-content {
+  width: 100%;
+}
+
+.intro-visual {
+  width: 100%;
+  margin-inline: auto;
+  padding: 0;
+  transform: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.intro-visual img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  transform: none !important;
+  object-fit: contain;
+}
+
+.intro-visual-main {
+  width: min(430px, 100%) !important;
+  margin-inline: auto !important;
+}
+
+.intro-visual-wc,
+.intro-visual-eu,
+.intro-visual-pk,
+.intro-visual-lm {
+  width: min(300px, 100%) !important;
+  margin: 0 auto !important;
+}
+
+.intro-detail {
+  width: 100%;
+  min-width: 0;
+}
+
+.intro-detail h2,
+.intro-detail p {
+  max-width: 100%;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.intro-keywords {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.intro-keyword-button,
+.intro-keywords span {
+  max-width: 100%;
+}
+
+@media (max-width: 1300px) {
+  .intro-page-card {
+    padding: 60px 54px 64px;
+  }
+
+  .intro-heading {
+    width: min(100%, 900px);
+    margin: 54px auto 42px;
+  }
+
+  .intro-content {
+    width: min(100%, 900px);
+    max-width: 900px;
+    margin-inline: auto;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 40px;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .intro-visual {
+    width: min(100%, 520px) !important;
+    max-width: 520px;
+    margin-inline: auto !important;
+  }
+
+  .intro-visual-main {
+    width: min(430px, 100%) !important;
+  }
+
+  .intro-visual-wc,
+  .intro-visual-eu,
+  .intro-visual-pk,
+  .intro-visual-lm {
+    width: min(320px, 100%) !important;
+  }
+
+  .intro-detail {
+    width: min(100%, 760px);
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .intro-detail h2 {
+    margin: 0 0 18px;
+    font-size: 32px;
+    line-height: 1.35;
+  }
+
+  .intro-detail p {
+    width: min(100%, 700px);
+    margin-inline: auto;
+    font-size: 18px;
+    line-height: 1.8;
+  }
+
+  .intro-keywords {
+    justify-content: center;
+    margin-top: 26px;
+  }
+}
+
+@media (max-width: 920px) {
+  .intro-page-card {
+    padding: 48px 30px 54px;
+  }
+
+  .intro-back-button {
+    top: 34px;
+    left: 30px;
+  }
+
+  .intro-heading {
+    margin: 52px auto 36px;
+  }
+
+  .intro-content {
+    gap: 34px;
+  }
+
+  .intro-visual {
+    width: min(100%, 440px) !important;
+    max-width: 440px;
+  }
+
+  .intro-detail {
+    width: min(100%, 680px);
+  }
+
+  .intro-detail h2 {
+    font-size: 29px;
+  }
+
+  .intro-detail p {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 760px) {
+  .intro-page-card {
+    min-height: auto;
+    padding: 44px 22px 50px;
+    border-radius: 30px;
+  }
+
+  .intro-back-button {
+    top: 26px;
+    left: 22px;
+    width: 82px;
+    height: 42px;
+    font-size: 14px;
+  }
+
+  .intro-heading {
+    margin: 52px auto 32px;
+  }
+
+  #intro-badge {
+    padding: 7px 14px;
+    font-size: 14px;
+  }
+
+  #intro-eyebrow {
+    margin-top: 16px;
+    font-size: 13px;
+    letter-spacing: 2.2px;
+  }
+
+  #intro-title {
+    font-size: clamp(38px, 10vw, 52px);
+  }
+
+  #intro-description {
+    font-size: 16px;
+    line-height: 1.7;
+    word-break: keep-all;
+  }
+
+  .intro-content {
+    gap: 28px;
+  }
+
+  .intro-visual {
+    width: min(100%, 380px) !important;
+    max-width: 380px;
+  }
+
+  .intro-visual-main {
+    width: min(360px, 100%) !important;
+  }
+
+  .intro-visual-wc,
+  .intro-visual-eu,
+  .intro-visual-pk,
+  .intro-visual-lm {
+    width: min(280px, 100%) !important;
+  }
+
+  .intro-detail {
+    width: 100%;
+  }
+
+  .intro-detail h2 {
+    font-size: 27px;
+  }
+
+  .intro-detail p {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .intro-keywords {
+    gap: 8px;
+  }
+
+  .intro-keyword-button,
+  .intro-keywords span {
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  .intro-test-button.cta {
+    width: min(100%, 380px);
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-page-card {
+    padding: 40px 16px 44px;
+  }
+
+  .intro-back-button {
+    left: 16px;
+  }
+
+  .intro-heading {
+    margin-top: 48px;
+  }
+
+  #intro-description {
+    font-size: 14px;
+  }
+
+  .intro-content {
+    gap: 24px;
+  }
+
+  .intro-visual {
+    width: min(100%, 330px) !important;
+  }
+
+  .intro-visual-main {
+    width: min(320px, 100%) !important;
+  }
+
+  .intro-visual-wc,
+  .intro-visual-eu,
+  .intro-visual-pk,
+  .intro-visual-lm {
+    width: min(260px, 100%) !important;
+  }
+
+  .intro-detail h2 {
+    font-size: 24px;
+  }
+
+  .intro-detail p {
+    font-size: 14px;
+  }
+
+  .intro-test-button.cta {
+    min-height: 68px;
+    padding-inline: 20px;
+  }
+
+  .intro-test-button.cta > strong {
+    font-size: 18px;
+  }
+}
+

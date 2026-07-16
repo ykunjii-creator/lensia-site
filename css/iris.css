@@ -166,22 +166,33 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-.iris-camera-button {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(184, 216, 242, 0.54),
-      rgba(203, 197, 233, 0.42)
-    );
+.iris-camera-button,
+.iris-upload-button {
+  background: rgba(255, 255, 255, 0.56);
 }
 
-.iris-upload-button {
+.iris-camera-button:hover {
   background:
     linear-gradient(
       135deg,
-      rgba(255, 230, 255, 0.58),
-      rgba(229, 185, 234, 0.34)
+      rgba(184, 216, 242, 0.6),
+      rgba(203, 197, 233, 0.48)
     );
+  box-shadow:
+    0 14px 30px rgba(111, 106, 168, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.iris-upload-button:hover {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 230, 255, 0.64),
+      rgba(229, 185, 234, 0.4)
+    );
+  box-shadow:
+    0 14px 30px rgba(111, 106, 168, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .iris-button-icon {

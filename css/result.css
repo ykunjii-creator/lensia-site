@@ -51,12 +51,12 @@
 
 .result-section-title h2,
 .result-lpti-card > h2 {
-  font-size: 21px;
+  font-size: 23px;
 }
 
 .result-section-title span {
   color: var(--text-accent, #7772a8);
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 800;
 }
 
@@ -95,20 +95,20 @@
 }
 
 .result-placeholder-icon {
-  font-size: 31px;
+  font-size: 33px;
   color: #8f8abe;
 }
 
 .result-iris-placeholder strong {
   margin-top: 10px;
   color: var(--text-primary, #51536b);
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .result-iris-placeholder p {
   margin: 5px 0 14px;
   color: var(--text-muted, #838697);
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .result-placeholder-button {
@@ -117,7 +117,7 @@
   border: 0;
   border-radius: 999px;
   color: #fff;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 800;
   cursor: pointer;
   background: linear-gradient(135deg, #b8d8f2, #c9c5e8, #e5b9ea);
@@ -152,7 +152,7 @@
   display: grid;
   place-items: center;
   color: var(--text-accent, #7772a8);
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .result-color-chips {
@@ -179,12 +179,12 @@
 }
 
 .result-color-chips small {
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 800;
 }
 
 .result-color-chips b {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .result-analysis-list {
@@ -198,7 +198,7 @@
   grid-template-columns: 64px 1fr;
   gap: 8px;
   color: var(--text-secondary, #686b7d);
-  font-size: 14px;
+  font-size: 17px;
 }
 
 .result-analysis-list dt {
@@ -212,7 +212,7 @@
 .result-analysis-note {
   margin: 18px 0 0;
   color: var(--text-muted, #838697);
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .result-main-column {
@@ -244,14 +244,14 @@
 }
 
 .result-character-placeholder span {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 900;
   letter-spacing: 1.5px;
 }
 
 .result-character-placeholder small {
   margin-top: 6px;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .result-type-summary {
@@ -268,7 +268,7 @@
 .result-type-badges b {
   padding: 6px 11px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .result-type-badges span {
@@ -294,13 +294,13 @@
   display: block;
   margin-top: 7px;
   color: var(--text-muted, #838697);
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .result-type-summary h3 {
   margin: 10px 0 12px;
   color: var(--text-primary, #51536b);
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .result-palette {
@@ -327,7 +327,7 @@
   align-items: center;
   margin: 20px 0;
   color: var(--text-primary, #51536b);
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .result-axis {
@@ -362,17 +362,21 @@
 .result-recommend-heading {
   padding: 0 4px;
   align-items: end;
+  flex-wrap: wrap;
+  row-gap: 4px;
 }
 
 .result-recommend-heading h2 {
   flex: 0 0 auto;
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .result-recommend-heading p {
+  flex: 1 1 220px;
+  min-width: 0;
   margin: 0;
   color: var(--text-secondary, #686b7d);
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .result-product-grid {
@@ -401,7 +405,7 @@
   border-radius: 10px;
   color: #fff;
   background: linear-gradient(135deg, #9f9acb, #c9a9cf);
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 900;
 }
 
@@ -411,7 +415,7 @@
   place-content: center;
   border-radius: 15px;
   color: rgba(100,95,120,.5);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 900;
   letter-spacing: 1.4px;
   background:
@@ -429,14 +433,14 @@
 .result-product-card h3 {
   margin: 10px 0 5px;
   color: var(--text-primary, #51536b);
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .result-product-card p {
   min-height: 34px;
   margin: 0 0 8px;
   color: var(--text-secondary, #686b7d);
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.55;
 }
 
@@ -445,7 +449,7 @@
   justify-content: space-between;
   margin-bottom: 9px;
   color: var(--text-muted, #838697);
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .result-product-actions {
@@ -457,7 +461,7 @@
 .result-product-actions button {
   min-height: 31px;
   border-radius: 999px;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 800;
   cursor: pointer;
 }
@@ -481,31 +485,60 @@
 .result-tryon-heading p {
   margin: 0 0 8px;
   color: var(--text-accent, #7772a8);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 900;
   letter-spacing: 3px;
 }
 
 .result-tryon-heading h2 {
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .result-tryon-title-line span {
   color: var(--text-secondary, #686b7d);
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .result-tryon-layout {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
+  grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
   gap: 24px;
+  align-items: stretch;
+}
+
+.result-tryon-preview-wrap {
+  width: 100%;
+}
+
+/* =========================================================
+   가상 착용 — 좌우 2단 레이아웃(컨트롤 | 미리보기)이 유지되는
+   901px~1180px 구간에서는 '눈 이미지를 준비해 주세요' 패널의
+   비중을 키워서, 세로로 쌓인 미리보기 쪽이 상대적으로
+   가로로 너무 길어지지 않도록 함
+========================================================= */
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .result-tryon-layout {
+    grid-template-columns: minmax(420px, 520px) minmax(0, 1fr);
+  }
+
+  .result-tryon-step h3 {
+    font-size: 23px;
+  }
+
+  .result-tryon-step p {
+    font-size: 17px;
+  }
 }
 
 .result-tryon-control {
   padding: 18px;
   border-radius: 22px;
   background: rgba(255,255,255,.42);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .result-tryon-step {
@@ -523,20 +556,20 @@
   border-radius: 50%;
   color: #fff;
   background: #b9b6e6;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 900;
 }
 
 .result-tryon-step h3 {
   margin: 1px 0 6px;
   color: var(--text-primary, #51536b);
-  font-size: 14px;
+  font-size: 17px;
 }
 
 .result-tryon-step p {
   margin: 0 0 14px;
   color: var(--text-secondary, #686b7d);
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.55;
 }
 
@@ -550,19 +583,48 @@
   gap: 9px;
   align-items: center;
   text-align: left;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.84);
   border-radius: 14px;
   color: var(--text-primary, #51536b);
-  background: linear-gradient(135deg, rgba(190,220,248,.72), rgba(227,225,251,.76));
+  background: rgba(255, 255, 255, 0.56);
+  box-shadow:
+    0 10px 26px rgba(111, 106, 168, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
   cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.result-upload-option.upload {
-  background: linear-gradient(135deg, rgba(245,229,255,.76), rgba(253,220,245,.72));
+.result-upload-option:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 14px 30px rgba(111, 106, 168, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.result-upload-option:not(.upload):hover {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(184, 216, 242, 0.6),
+      rgba(203, 197, 233, 0.48)
+    );
+}
+
+.result-upload-option.upload:hover {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 230, 255, 0.64),
+      rgba(229, 185, 234, 0.4)
+    );
 }
 
 .result-upload-option > span {
-  font-size: 21px;
+  font-size: 23px;
 }
 
 .result-upload-option strong,
@@ -571,13 +633,13 @@
 }
 
 .result-upload-option strong {
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .result-upload-option small {
   margin-top: 3px;
   color: var(--text-muted, #838697);
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .result-file-status {
@@ -586,16 +648,17 @@
   border-radius: 11px;
   color: var(--text-muted, #838697);
   background: rgba(255,255,255,.46);
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .result-tryon-analyze {
   width: 100%;
   min-height: 44px;
+  margin-top: auto;
   border: 0;
   border-radius: 999px;
   color: #fff;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 900;
   background: linear-gradient(135deg, #b8d8f2, #c9c5e8, #e5b9ea);
 }
@@ -606,15 +669,18 @@
 
 .result-tryon-preview-wrap {
   position: relative;
+  height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
   align-items: stretch;
 }
 
 .result-tryon-preview {
   position: relative;
   min-height: 260px;
+  height: 100%;
   overflow: hidden;
   display: grid;
   place-content: center;
@@ -639,7 +705,7 @@
   border-radius: 999px;
   color: var(--text-primary, #51536b);
   background: rgba(255,255,255,.82);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -649,7 +715,7 @@
 }
 
 .result-tryon-preview p {
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.55;
 }
 
@@ -660,7 +726,7 @@
   top: 50%;
   width: 42px;
   height: 42px;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) rotate(90deg);
   display: grid;
   place-items: center;
   border-radius: 50%;
@@ -707,7 +773,7 @@
 .result-save-button small {
   margin-top: 2px;
   color: var(--text-muted, #838697);
-  font-size: 10px;
+  font-size: 13px;
 }
 
 /* 태블릿 */
@@ -756,13 +822,38 @@
   .result-product-card {
     display: grid;
     grid-template-columns: 150px 1fr;
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas:
+      "img title"
+      "img desc"
+      "img meta"
+      "img actions";
     column-gap: 14px;
+    row-gap: 2px;
   }
 
   .result-product-image-placeholder {
-    grid-row: 1 / span 5;
+    grid-area: img;
     height: 100%;
     min-height: 150px;
+  }
+
+  .result-product-card h3 {
+    grid-area: title;
+    margin-top: 0;
+  }
+
+  .result-product-card p {
+    grid-area: desc;
+  }
+
+  .result-product-meta {
+    grid-area: meta;
+  }
+
+  .result-product-actions {
+    grid-area: actions;
+    align-self: end;
   }
 
   .result-best-label {
@@ -771,6 +862,19 @@
 
   .result-tryon-layout {
     grid-template-columns: 1fr;
+  }
+
+  .result-tryon-preview-wrap {
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .result-tryon-step h3 {
+    font-size: 20px;
+  }
+
+  .result-tryon-step p {
+    font-size: 16px;
   }
 }
 
@@ -799,12 +903,23 @@
   .result-recommend-heading,
   .result-tryon-title-line {
     display: block;
+    align-items: initial;
+    padding: 0;
+  }
+
+  .result-recommend-heading h2 {
+    width: 100%;
   }
 
   .result-recommend-heading p,
   .result-tryon-title-line span {
     display: block;
-    margin-top: 7px;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 6px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: keep-all;
   }
 
   .result-product-card {
@@ -812,16 +927,25 @@
   }
 
   .result-product-image-placeholder {
+    grid-area: auto;
+    height: auto;
+    width: 100%;
+  }
+
+  .result-product-card h3,
+  .result-product-card p,
+  .result-product-meta,
+  .result-product-actions {
+    grid-area: auto;
+    width: 100%;
+  }
+
+  .result-product-card h3 {
+    margin-top: 10px;
+  }
+
+  .result-product-image-placeholder {
     min-height: 130px;
-  }
-
-  .result-tryon-preview-wrap {
-    grid-template-columns: 1fr;
-  }
-
-  .result-tryon-arrow {
-    top: 50%;
-    transform: translate(-50%, -50%) rotate(90deg);
   }
 
   .result-bottom-actions {
@@ -872,7 +996,7 @@
 
 .result-type-summary h3 {
   margin-top: 13px;
-  font-size: 21px;
+  font-size: 23px;
 }
 
 .result-type-badges {
@@ -897,7 +1021,7 @@
   gap: 14px;
   margin: 38px 0;
   color: var(--text-primary, #51536b);
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .result-axis {
@@ -1076,6 +1200,17 @@
 
   .result-type-summary {
     max-width: 260px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .result-type-badges {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .result-palette {
+    justify-content: center;
   }
 
   .result-type-summary > strong {
@@ -1083,13 +1218,13 @@
   }
 
   .result-type-summary h3 {
-    font-size: 17px;
+    font-size: 19px;
   }
 
   .result-type-badges span,
   .result-type-badges b {
     padding: 5px 9px;
-    font-size: 10px;
+    font-size: 13px;
   }
 
   .result-axis-panel {
@@ -1105,7 +1240,7 @@
       58px;
     gap: 8px;
     margin: 34px 0;
-    font-size: 11px;
+    font-size: 14px;
   }
 
   .result-axis span {
@@ -1138,7 +1273,491 @@
       minmax(100px, 1fr)
       52px;
     margin: 32px 0;
-    font-size: 10px;
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   VIRTUAL TRY-ON — IRIS ANALYSIS MATCHED FINAL
+   홍채 이미지 분석 페이지와 동일한 비율·패딩·버튼 구조
+   미리보기는 기존 사진 → 가상 착용 결과 세로 배치 유지
+========================================================= */
+
+/* 가상 착용 전체 카드 */
+.result-tryon-card {
+  padding: 32px;
+  border-radius: 30px;
+}
+
+/* 제목 영역 */
+.result-tryon-heading {
+  margin-bottom: 26px;
+}
+
+.result-tryon-heading p {
+  margin: 0 0 10px;
+  color: var(--text-accent, #7772a8);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.result-tryon-title-line {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.result-tryon-heading h2 {
+  margin: 0;
+  color: var(--text-primary, #51536b);
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.result-tryon-title-line span {
+  color: var(--text-secondary, #686b7d);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+/* 홍채 분석 페이지와 동일한 좌우 비율 */
+.result-tryon-layout {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns:
+    minmax(360px, 0.84fr)
+    minmax(500px, 1.16fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* 왼쪽 컨트롤 / 오른쪽 미리보기 공통 카드 톤 */
+.result-tryon-control,
+.result-tryon-preview-wrap {
+  min-width: 0;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.58),
+      rgba(255, 255, 255, 0.28)
+    );
+  box-shadow:
+    0 18px 48px rgba(102, 104, 150, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* 왼쪽 컨트롤 */
+.result-tryon-control {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 홍채 분석의 step-heading과 동일 */
+.result-tryon-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.result-tryon-step > span {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  background:
+    linear-gradient(
+      135deg,
+      #b8d8f2 0%,
+      #cbc5e9 50%,
+      #e5b9ea 100%
+    );
+  box-shadow: 0 10px 24px rgba(111, 106, 168, 0.18);
+}
+
+.result-tryon-step h3 {
+  margin: 2px 0 8px;
+  color: var(--text-primary, #51536b);
+  font-size: 23px;
+  font-weight: 900;
+}
+
+.result-tryon-step p {
+  margin: 0;
+  color: var(--text-secondary, #686b7d);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+/* 업로드 버튼도 홍채 분석과 같은 비율 */
+.result-upload-option {
+  width: 100%;
+  min-height: 78px;
+  margin-top: 0;
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 48px 1fr 24px;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  border-radius: 20px;
+  color: var(--text-primary, #51536b);
+  text-align: left;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.56);
+  box-shadow:
+    0 10px 26px rgba(111, 106, 168, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.result-upload-option + .result-upload-option {
+  margin-top: 14px;
+}
+
+.result-upload-option:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 14px 30px rgba(111, 106, 168, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.result-upload-option:not(.upload):hover {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(184, 216, 242, 0.6),
+      rgba(203, 197, 233, 0.48)
+    );
+}
+
+.result-upload-option.upload:hover {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 230, 255, 0.64),
+      rgba(229, 185, 234, 0.4)
+    );
+}
+
+/* 버튼 아이콘 */
+.result-upload-option > span {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  color: #7772a8;
+  font-size: 25px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.66);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+
+.result-upload-option > div {
+  min-width: 0;
+}
+
+.result-upload-option strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-primary, #51536b);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.result-upload-option small {
+  display: block;
+  overflow: hidden;
+  color: var(--text-muted, #838697);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.result-upload-option > b {
+  color: #8582b5;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+/* 파일 선택 상태 */
+.result-file-status {
+  min-height: 48px;
+  margin: 18px 0 0;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(111, 106, 168, 0.1);
+  border-radius: 16px;
+  color: var(--text-muted, #838697);
+  background: rgba(255, 255, 255, 0.38);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* 분석 버튼 */
+.result-tryon-analyze {
+  width: 100%;
+  min-height: 64px;
+  margin-top: auto;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  background:
+    linear-gradient(
+      135deg,
+      #b8d8f2 0%,
+      #cbc5e9 50%,
+      #e5b9ea 100%
+    );
+  box-shadow:
+    0 16px 34px rgba(111, 106, 168, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.result-tryon-analyze:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+.result-tryon-analyze:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* 오른쪽 미리보기: 세로 배치 유지 */
+.result-tryon-preview-wrap {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, minmax(350px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.result-tryon-preview {
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  place-content: center;
+  border: 1px dashed rgba(119, 114, 168, 0.24);
+  border-radius: 24px;
+  color: var(--text-secondary, #686b7d);
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.72),
+      rgba(226, 239, 250, 0.4) 48%,
+      rgba(255, 230, 255, 0.34)
+    );
+}
+
+.result-tryon-preview img {
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  object-fit: contain;
+}
+
+.result-preview-label {
+  top: 14px;
+  left: 14px;
+  padding: 7px 12px;
+  font-size: 12px;
+}
+
+.result-tryon-preview p {
+  margin: 0;
+  padding: 30px;
+  color: var(--text-muted, #838697);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.result-tryon-arrow {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%) rotate(90deg);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #8c80cd;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(111, 106, 168, 0.18);
+  font-size: 32px;
+}
+
+/* =========================================================
+   1180px 이하
+========================================================= */
+
+@media (max-width: 1180px) {
+  .result-tryon-card {
+    padding: 26px;
+  }
+
+  .result-tryon-layout {
+    grid-template-columns:
+      minmax(320px, 0.9fr)
+      minmax(410px, 1.1fr);
+    gap: 20px;
+  }
+
+  .result-tryon-control,
+  .result-tryon-preview-wrap {
+    padding: 26px;
+  }
+}
+
+/* =========================================================
+   920px 이하: 홍채 분석과 동일하게 1열
+========================================================= */
+
+@media (max-width: 920px) {
+  .result-tryon-card {
+    padding: 24px;
+    border-radius: 28px;
+  }
+
+  .result-tryon-title-line {
+    display: block;
+  }
+
+  .result-tryon-title-line span {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .result-tryon-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .result-tryon-control,
+  .result-tryon-preview-wrap {
+    padding: 24px;
+  }
+
+  .result-tryon-control {
+    min-height: 520px;
+  }
+
+  .result-tryon-preview-wrap {
+    grid-template-rows: repeat(2, minmax(320px, 1fr));
+  }
+
+  .result-tryon-preview,
+  .result-tryon-preview img {
+    min-height: 320px;
+  }
+}
+
+/* =========================================================
+   620px 이하
+========================================================= */
+
+@media (max-width: 620px) {
+  .result-tryon-card {
+    padding: 20px 14px;
+  }
+
+  .result-tryon-heading h2 {
+    font-size: 26px;
+  }
+
+  .result-tryon-title-line span {
+    font-size: 13px;
+  }
+
+  .result-tryon-control,
+  .result-tryon-preview-wrap {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .result-tryon-control {
+    min-height: 490px;
+  }
+
+  .result-tryon-step {
+    gap: 12px;
+  }
+
+  .result-tryon-step h3 {
+    font-size: 20px;
+  }
+
+  .result-tryon-step p {
+    font-size: 14px;
+  }
+
+  .result-upload-option {
+    min-height: 72px;
+    padding: 12px 14px;
+    grid-template-columns: 42px 1fr 18px;
+    gap: 10px;
+  }
+
+  .result-upload-option > span {
+    width: 42px;
+    height: 42px;
+  }
+
+  .result-upload-option strong {
+    font-size: 15px;
+  }
+
+  .result-upload-option small {
+    font-size: 11px;
+  }
+
+  .result-tryon-preview-wrap {
+    grid-template-rows: repeat(2, minmax(250px, 1fr));
+  }
+
+  .result-tryon-preview,
+  .result-tryon-preview img {
+    min-height: 250px;
   }
 }
 
