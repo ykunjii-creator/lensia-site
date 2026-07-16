@@ -126,10 +126,10 @@ const resultState = {
  */
 function formatTypeCode(code) {
   if (!code || code.length < 4) {
-    return "WEP-M";
+    return "WEPL";
   }
 
-  return `${code.slice(0, 3)}-${code[3]}`;
+  return `${code.slice(0, 3)}${code[3]}`;
 }
 
 /**
@@ -145,7 +145,7 @@ function safeGetTypeCode() {
     console.warn("LPTI 유형을 불러오지 못했습니다.", error);
   }
 
-  return "WEPM";
+  return "WEPL";
 }
 
 /**
@@ -156,7 +156,7 @@ function safeGetTypeCode() {
  */
 function updateResult() {
   const code = safeGetTypeCode();
-  const data = typeData[code] || typeData.WEPM;
+  const data = typeData[code] || typeData.WEPL;
 
   const fullTypeName = [
     code[0] === "W" ? "Warm" : "Cool",
@@ -169,6 +169,15 @@ function updateResult() {
   setText("#type-full", fullTypeName);
   setText("#type-name", data.name);
   setText("#type-description", data.description);
+
+  const characterImage = document.querySelector(
+    "#result-character-image"
+  );
+
+  if (characterImage) {
+    characterImage.src = `./assets/characters/${code}.png`;
+    characterImage.alt = `${code} 유형 캐릭터`;
+  }
 
   /*
    * 현재는 유형에 따라 27% 또는 73%로 표시

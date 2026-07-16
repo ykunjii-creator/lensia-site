@@ -832,12 +832,18 @@ function pickType(scores, leftType, rightType, defaultType) {
 }
 
 function getTypeCode() {
+  const answeredCount = Object.keys(answers).length;
+
+  if (answeredCount === 0) {
+    return "WEPL";
+  }
+
   const scores = calculateScores();
 
-  const wc = pickType(scores, 'W', 'C', 'W');
-  const eu = pickType(scores, 'E', 'U', 'E');
-  const pk = pickType(scores, 'P', 'K', 'P');
-  const lm = pickType(scores, 'L', 'M', 'M');
+  const wc = pickType(scores, "W", "C", "W");
+  const eu = pickType(scores, "E", "U", "E");
+  const pk = pickType(scores, "P", "K", "P");
+  const lm = pickType(scores, "L", "M", "M");
 
   return `${wc}${eu}${pk}${lm}`;
 }
