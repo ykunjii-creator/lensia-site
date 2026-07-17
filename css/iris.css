@@ -887,3 +887,48 @@
   border-color: rgba(200,222,237,.56) !important;
   border-top-color: #6f7f9d !important;
 }
+
+/* =========================================================
+   IRIS UPLOAD HOVER TONE SYNC — FINAL
+   가상 착용 카메라 촬영하기와 동일한 톤
+========================================================= */
+
+.iris-main-button {
+  color: #595959 !important;
+  background: rgba(255, 255, 255, 0.74) !important;
+  border-color: rgba(111, 127, 157, 0.13) !important;
+  box-shadow:
+    0 10px 26px rgba(98, 116, 143, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.84) !important;
+}
+
+/* 카메라 촬영 / 이미지 업로드 모두 동일한 호버톤 */
+.iris-main-button:hover,
+.iris-camera-button:hover,
+.iris-upload-button:hover {
+  color: #4f5d73 !important;
+  background:
+    linear-gradient(
+      135deg,
+      #eef6fb 0%,
+      #dcecf8 72%,
+      #e8e6f2 100%
+    ) !important;
+  border-color: rgba(111, 127, 157, 0.16) !important;
+  box-shadow:
+    0 14px 30px rgba(98, 116, 143, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* 아이콘 박스도 가상 착용과 동일 */
+.iris-button-icon,
+.iris-button-image {
+  color: #6f7f9d !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(238, 246, 251, 0.78)
+    ) !important;
+}
