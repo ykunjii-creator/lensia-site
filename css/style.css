@@ -2932,3 +2932,38 @@ body {color: var(--text-primary);}
     min-width: 0 !important;
   }
 }
+
+/* =========================================================
+   LENSIA SOFT GRAY + LAVENDER COLOR OVERRIDE
+   색상만 변경 / 레이아웃·크기·반응형 유지
+========================================================= */
+:root {
+  --text-primary:#595959; --text-secondary:#595959; --text-muted:#595959;
+  --text-accent:#595959; --text-on-color:#595959; --ink:#595959; --muted:#595959;
+  --primary:#d8d5e7; --primary-deep:#77728f; --primary-soft:#f1f0fa;
+  --pink:#f1f0fa; --lavender:#f1f0fa; --blue:#f1f0fa;
+  --card:rgba(255,255,255,.66); --line:rgba(119,114,143,.14);
+  --shadow:0 22px 58px rgba(100,98,118,.10),0 7px 20px rgba(100,98,118,.05),inset 0 1px 0 rgba(255,255,255,.78);
+}
+body{
+  color:#595959!important;
+  background:radial-gradient(circle at 16% 24%,rgba(241,240,250,.82),transparent 34%),radial-gradient(circle at 84% 20%,rgba(241,240,250,.76),transparent 36%),linear-gradient(135deg,#f9f9f9 0%,#f1f0fa 54%,#f1f0fa 100%)!important;
+}
+.page-shell::before{background:radial-gradient(circle at 14% 86%,rgba(255,255,255,.50),transparent 18%),radial-gradient(circle at 86% 78%,rgba(255,255,255,.42),transparent 20%),linear-gradient(120deg,rgba(255,255,255,.20),transparent 48%)!important;}
+.page-shell::after{background:rgba(255,255,255,.32)!important;}
+.glass-card,.question-card,.topbar,.home-feature-card{background:rgba(255,255,255,.62)!important;border-color:rgba(255,255,255,.86)!important;box-shadow:var(--shadow)!important;}
+.home-hero,.hero{background:radial-gradient(circle at 18% 34%,rgba(241,240,250,.86),transparent 38%),radial-gradient(circle at 82% 34%,rgba(241,240,250,.72),transparent 40%),linear-gradient(135deg,rgba(249,249,249,.86),rgba(241,240,250,.74))!important;}
+.nav-link,.nav-link.active,.hero-kicker,.eyebrow,.hero-title,.hero h1,.hero-desc,.hero-description,.feature-card h2,.home-feature-card h2,.feature-card p,.home-feature-card p,.quiz-header h1,.question-card h2,.question-kicker,.question-description,.progress-meta,.answer-card,.answer-card strong,.answer-card small,.guide-card,.guide-card b,.feature-tags span,.ghost-button,.secondary-button,.hero-cta{color:#595959!important;text-shadow:none!important;}
+.nav-link:hover,.nav-link.active:hover,.hero-cta:hover,.ghost-button:hover,.secondary-button:hover{color:#77728f!important;}
+.nav-link.active{background:rgba(241,240,250,.86)!important;}
+.feature-icon,.feature-symbol,.quiz-icon,.ar-icon,.feature-arrow{color:#77728f!important;}
+.feature-icon,.feature-symbol,.answer-card span{background:linear-gradient(145deg,#fff 0%,#f1f0fa 100%)!important;}
+.cta,.primary-button,.hero-cta,.progress-track span{color:#595959!important;background:linear-gradient(135deg,#f1f0fa 0%,#e8e6f2 50%,#ddd9ea 100%)!important;box-shadow:0 14px 30px rgba(111,106,143,.14),inset 0 1px 0 rgba(255,255,255,.56)!important;}
+.cta:hover,.primary-button:hover,.hero-cta:hover{background:linear-gradient(135deg,#e4e1ef 0%,#d8d4e7 50%,#cbc6dc 100%)!important;filter:none!important;}
+.ghost-button,.secondary-button{background:rgba(255,255,255,.72)!important;border-color:rgba(119,114,143,.14)!important;}
+.ghost-button:hover,.secondary-button:hover{background:#e8e6f2!important;}
+.progress-track{background:rgba(255,255,255,.66)!important;}
+.answer-card{background:rgba(255,255,255,.70)!important;border-color:rgba(255,255,255,.86)!important;}
+.answer-card:hover{background:#f1f0fa!important;border-color:#d8d4e7!important;}
+.answer-card.selected{background:linear-gradient(135deg,#f1f0fa,#e8e6f2)!important;border-color:#c9c4d9!important;}
+.guide-card span{color:#595959!important;background:#dedbea!important;}
