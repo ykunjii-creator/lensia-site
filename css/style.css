@@ -3,6 +3,7 @@
   기존 CSS에서 결과 페이지 전용 선택자만 result.css로 분리했습니다.
 */
 
+
 :root {--ink: #2f2d31;
   --muted: #69666e;
   --primary: #8f8df7;
@@ -3092,4 +3093,156 @@ body {
 
 .guide-card span {
   background: #dcecf8 !important;
+}
+
+/* =========================================================
+   TOPBAR FINAL
+   둥근 글래스 헤더 → 화면 가로형 연하늘색 헤더
+========================================================= */
+
+.topbar {
+  width: calc(100% + 7.2vw) !important;
+  max-width: none !important;
+
+  height: 110px !important;
+
+  margin:
+    -34px
+    -3.6vw
+    28px !important;
+
+  padding:
+    0
+    calc(3.6vw + 38px) !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(249, 249, 249, 0.96) 0%,
+      rgba(238, 246, 251, 0.96) 55%,
+      rgba(220, 236, 248, 0.96) 100%
+    ) !important;
+
+  box-shadow:
+    0 8px 24px rgba(98, 116, 143, 0.05) !important;
+
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+/* 로고 */
+
+.brand-logo {
+  width: 240px !important;
+  height: auto !important;
+}
+
+/* 메뉴 전체 */
+
+.nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 48px !important;
+}
+
+/* 메뉴 버튼 */
+
+.nav-link {
+  padding: 12px 6px !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  color: #595959 !important;
+  background: transparent !important;
+
+  font-size: 20px !important;
+  font-weight: 600 !important;
+
+  box-shadow: none !important;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease !important;
+}
+
+/* 호버 */
+
+.nav-link:hover {
+  color: #6f7f9d !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 활성 메뉴도 동그란 배경 제거 */
+
+.nav-link.active {
+  color: #595959 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 혹시 기존 active 가상요소가 있다면 제거 */
+
+.nav-link.active::before,
+.nav-link.active::after {
+  display: none !important;
+}
+
+@media (max-width: 920px) {
+  .topbar {
+    width: calc(100% + 36px) !important;
+    height: 84px !important;
+
+    margin:
+      -18px
+      -18px
+      22px !important;
+
+    padding: 0 24px !important;
+  }
+
+  .brand-logo {
+    width: 180px !important;
+  }
+
+  .nav {
+    gap: 20px !important;
+  }
+
+  .nav-link {
+    padding: 9px 3px !important;
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .topbar {
+    width: calc(100% + 20px) !important;
+    height: 68px !important;
+
+    margin:
+      -10px
+      -10px
+      18px !important;
+
+    padding: 0 14px !important;
+  }
+
+  .brand-logo {
+    width: clamp(90px, 27vw, 130px) !important;
+  }
+
+  .nav {
+    gap: 7px !important;
+  }
+
+  .nav-link {
+    padding: 7px 2px !important;
+    font-size: 12px !important;
+  }
 }
