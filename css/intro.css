@@ -73,3 +73,44 @@
 #intro-page .intro-back-button:hover,#intro-page .intro-keyword-button:hover{color:#77728f!important;background:#e7e5f1!important;}
 #intro-page .intro-test-button,#intro-page .intro-test-button.cta{color:#595959!important;background:linear-gradient(135deg,#f1f0fa 0%,#e7e5f1 50%,#dad6e7 100%)!important;box-shadow:0 14px 30px rgba(111,106,143,.14),inset 0 1px 0 rgba(255,255,255,.56)!important;}
 #intro-page .intro-test-button:hover,#intro-page .intro-test-button.cta:hover{background:linear-gradient(135deg,#e3e0ee 0%,#d6d2e4 50%,#c8c3da 100%)!important;}
+
+/* =========================================================
+   LENSIA SKY BLUE MAIN + SOFT LAVENDER GLOW
+   하늘색을 메인으로, 연보라가 은은하게 번지는 최종 오버라이드
+   레이아웃·크기·반응형은 변경하지 않음
+========================================================= */
+
+#intro-page .intro-page-card {
+  background:
+    radial-gradient(circle at 82% 20%, rgba(220,236,248,.78), transparent 34%),
+    radial-gradient(circle at 16% 78%, rgba(241,240,250,.58), transparent 36%),
+    linear-gradient(135deg, rgba(255,255,255,.76), rgba(238,246,251,.62)) !important;
+}
+
+#intro-page .intro-back-button,
+#intro-page #intro-badge,
+#intro-page .intro-keywords span,
+#intro-page .intro-keyword-button {
+  background: rgba(255,255,255,.74) !important;
+  border-color: rgba(111,127,157,.12) !important;
+}
+
+#intro-page .intro-back-button:hover,
+#intro-page .intro-keyword-button:hover {
+  color: #62738f !important;
+  background: #dcecf8 !important;
+}
+
+#intro-page .intro-test-button,
+#intro-page .intro-test-button.cta {
+  color: #595959 !important;
+  background: linear-gradient(135deg, #eef6fb 0%, #dcecf8 58%, #e7e5f2 100%) !important;
+  box-shadow:
+    0 14px 30px rgba(98,116,143,.14),
+    inset 0 1px 0 rgba(255,255,255,.58) !important;
+}
+
+#intro-page .intro-test-button:hover,
+#intro-page .intro-test-button.cta:hover {
+  background: linear-gradient(135deg, #dcecf8 0%, #c8deed 58%, #d8d4e8 100%) !important;
+}

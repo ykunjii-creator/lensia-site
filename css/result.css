@@ -1832,3 +1832,77 @@
 .result-axis.warm,.result-axis.everyday,.result-axis.puppy,.result-axis.size{background:linear-gradient(90deg,#e8e6f2,#dcd8e9,#f1f0fa)!important;}
 .result-axis span{border-color:#d8d4e7!important;}
 .result-character-placeholder{color:#595959!important;background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(241,240,250,.66))!important;}
+
+/* =========================================================
+   LENSIA SKY BLUE MAIN + SOFT LAVENDER GLOW
+   하늘색을 메인으로, 연보라가 은은하게 번지는 최종 오버라이드
+   레이아웃·크기·반응형은 변경하지 않음
+========================================================= */
+
+.result-iris-card,
+.result-lpti-card,
+.result-tryon-card,
+.result-product-card,
+.result-tryon-control,
+.result-tryon-preview-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.72), rgba(238,246,251,.52)) !important;
+}
+
+.result-iris-placeholder,
+.result-tryon-preview {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.84), rgba(220,236,248,.62) 48%, rgba(241,240,250,.44)) !important;
+  border-color: rgba(111,127,157,.26) !important;
+}
+
+.result-placeholder-icon,
+.result-iris-ring b,
+.result-upload-option > span,
+.result-upload-option > b,
+.result-tryon-arrow {
+  color: #6f7f9d !important;
+}
+
+.result-placeholder-button,
+.result-try-button,
+.result-tryon-analyze,
+.result-retest-button,
+.result-type-badges span,
+.result-best-label,
+.result-preview-label.active,
+.result-tryon-step > span {
+  color: #595959 !important;
+  background: linear-gradient(135deg, #eef6fb 0%, #dcecf8 58%, #e7e5f2 100%) !important;
+}
+
+.result-placeholder-button:hover,
+.result-try-button:hover,
+.result-tryon-analyze:hover:not(:disabled),
+.result-retest-button:hover {
+  background: linear-gradient(135deg, #dcecf8 0%, #c8deed 58%, #d8d4e8 100%) !important;
+}
+
+.result-upload-option:hover,
+.result-upload-option:not(.upload):hover {
+  background: #dcecf8 !important;
+}
+
+.result-upload-option.upload:hover {
+  background: linear-gradient(135deg, #eef6fb, #e7e5f2) !important;
+}
+
+.result-axis.warm,
+.result-axis.everyday,
+.result-axis.puppy,
+.result-axis.size {
+  background: linear-gradient(90deg, #eef6fb 0%, #dcecf8 58%, #e7e5f2 100%) !important;
+}
+
+.result-axis span {
+  border-color: #c8deed !important;
+}
+
+.result-character-placeholder {
+  background: linear-gradient(145deg, rgba(255,255,255,.80), rgba(238,246,251,.68)) !important;
+}
