@@ -1,0 +1,196 @@
+/* =========================================================
+   LENSIA 결과 이미지 저장 전용 CSS
+   파일 위치: export/result-export.css
+
+   이 CSS는 평소 화면에는 거의 영향을 주지 않고,
+   result-export.js가 저장을 시작할 때 추가하는
+   .lensia-export-stage / .lensia-export-mode에만 적용됩니다.
+========================================================= */
+
+/* 저장 중 화면에 잠깐 사용할 숨김 작업 공간 */
+.lensia-export-stage {
+  position: fixed;
+  left: -100000px;
+  top: 0;
+  width: 1400px;
+  min-height: 1px;
+  z-index: -99999;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 1;
+}
+
+/* 저장용 결과 전체 */
+.lensia-export-mode {
+  box-sizing: border-box;
+  width: 1400px !important;
+  max-width: none !important;
+  min-width: 1400px !important;
+  margin: 0 !important;
+  padding: 54px !important;
+
+  display: grid !important;
+  gap: 24px !important;
+
+  color: #595959;
+  background:
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(226, 239, 250, 0.95),
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 88% 14%,
+      rgba(241, 240, 250, 0.98),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      #f9fbfd 0%,
+      #f7f7fb 52%,
+      #fbf8fc 100%
+    ) !important;
+
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif !important;
+}
+
+/* clone 안의 모든 요소 크기 계산 안정화 */
+.lensia-export-mode,
+.lensia-export-mode *,
+.lensia-export-mode *::before,
+.lensia-export-mode *::after {
+  box-sizing: border-box;
+}
+
+/* 반응형 미디어쿼리에 흔들리지 않도록 PC 저장 배치 강제 */
+.lensia-export-mode .result-upper {
+  display: grid !important;
+  grid-template-columns:
+    minmax(300px, 0.7fr)
+    minmax(0, 1.75fr) !important;
+  gap: 18px !important;
+  align-items: stretch !important;
+}
+
+.lensia-export-mode .result-main-column {
+  display: grid !important;
+  gap: 16px !important;
+  min-width: 0 !important;
+}
+
+.lensia-export-mode .result-lpti-content {
+  display: grid !important;
+  grid-template-columns:
+    110px
+    250px
+    minmax(320px, 1fr) !important;
+  gap: 20px !important;
+  align-items: center !important;
+}
+
+.lensia-export-mode .result-product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+.lensia-export-mode .result-tryon-content {
+  display: grid !important;
+  grid-template-columns:
+    minmax(330px, 0.72fr)
+    minmax(0, 1.28fr) !important;
+  gap: 18px !important;
+  align-items: stretch !important;
+}
+
+.lensia-export-mode .result-tryon-preview-wrap {
+  display: grid !important;
+  grid-template-columns:
+    minmax(0, 1fr)
+    34px
+    minmax(0, 1fr) !important;
+  grid-template-rows: none !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+/* 저장 이미지에서 조작용 버튼 제거 */
+.lensia-export-mode .result-bottom-actions,
+.lensia-export-mode #restart-test,
+.lensia-export-mode #save-result-image,
+.lensia-export-mode .result-placeholder-button,
+.lensia-export-mode .result-detail-button,
+.lensia-export-mode .result-try-button,
+.lensia-export-mode #tryon-camera-button,
+.lensia-export-mode #tryon-upload-button,
+.lensia-export-mode #tryon-analyze-button,
+.lensia-export-mode #tryon-camera-input,
+.lensia-export-mode #tryon-file-input {
+  display: none !important;
+}
+
+/* 버튼을 뺀 뒤 불필요한 상태 문구 정돈 */
+.lensia-export-mode #tryon-file-status {
+  display: none !important;
+}
+
+/* 이미지 저장 시 깨짐 방지 */
+.lensia-export-mode img {
+  max-width: 100%;
+}
+
+.lensia-export-mode .result-character-image,
+.lensia-export-mode .result-iris-image,
+.lensia-export-mode .result-product-image,
+.lensia-export-mode .result-tryon-preview img {
+  visibility: visible;
+}
+
+/* hidden 속성이 붙은 이미지는 그대로 숨김 */
+.lensia-export-mode img[hidden] {
+  display: none !important;
+}
+
+/* 카드 그림자와 배경을 저장 이미지에서 조금 더 또렷하게 */
+.lensia-export-mode .result-iris-card,
+.lensia-export-mode .result-lpti-card,
+.lensia-export-mode .result-tryon-card,
+.lensia-export-mode .result-product-card,
+.lensia-export-mode .result-tryon-control,
+.lensia-export-mode .result-tryon-preview-wrap {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.92),
+      rgba(241, 240, 250, 0.72)
+    ) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.96) !important;
+
+  box-shadow:
+    0 16px 38px rgba(98, 116, 143, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.86) !important;
+}
+
+/* 저장 중 버튼 피드백 */
+#save-result-image.is-exporting {
+  cursor: wait !important;
+  pointer-events: none !important;
+  opacity: 0.72;
+}
+
+#save-result-image.is-exporting strong::after {
+  content: " 중...";
+}
+
+/* 저장용 요소가 브라우저 화면에 노출되는 예외 방지 */
+@media print {
+  .lensia-export-stage {
+    display: none !important;
+  }
+}

@@ -6,8 +6,8 @@
    - 렌즈 제품 이미지 표시
    - 스펙트럼 위치 변경
    - 홍채 이미지 결과 표시
+   - 피부·홍채 API 분석 결과 표시
    - 가상 착용 이미지 업로드 미리보기
-   - API 연결 전 임시 동작
 ========================================================= */
 
 /* =========================================================
@@ -383,11 +383,6 @@ const lensProducts = {
 
 /* =========================================================
    LPTI별 렌즈 추천 순위
-
-   배열 순서:
-   첫 번째 = 1순위
-   두 번째 = 2순위
-   세 번째 = 3순위
 ========================================================= */
 
 const lptiLensRanking = {
@@ -516,20 +511,14 @@ function setText(selector, value) {
   element.textContent = value;
 }
 
-/**
- * WEPL을 WEP-L 형식으로 표시
- */
 function formatTypeCode(code) {
   if (!code || code.length < 4) {
     return "WEP-L";
   }
 
-  return `${code.slice(0, 3)}-${code[3]}`;
+  return `${code.slice(0, 3)}${code[3]}`;
 }
 
-/**
- * script.js의 getTypeCode 결과 가져오기
- */
 function safeGetTypeCode() {
   try {
     if (typeof getTypeCode === "function") {
@@ -551,9 +540,6 @@ function safeGetTypeCode() {
   return "WEPL";
 }
 
-/**
- * 스펙트럼 점수 가져오기
- */
 function safeGetSpectrumScores(code) {
   try {
     if (typeof calculateScores === "function") {
@@ -716,6 +702,7 @@ function renderLensRecommendations(code) {
     }
 
     if (tryButton) {
+      tryButton.disabled = false;
       tryButton.dataset.lensId = lensId;
       tryButton.dataset.lensName = lens.nameKo;
 
@@ -726,6 +713,7 @@ function renderLensRecommendations(code) {
     }
 
     if (detailButton) {
+      detailButton.disabled = false;
       detailButton.dataset.lensId = lensId;
       detailButton.dataset.lensName = lens.nameKo;
     }
@@ -776,14 +764,61 @@ function updateResult() {
     "#result-character-image",
   );
 
-  if (characterImage) {
-    characterImage.src =
-      `./assets/characters/${code}.png`;
+  const characterVisual = document.querySelector(
+    ".result-character-visual",
+  );
+
+  if (characterImage && characterVisual) {
+    let placeholder = characterVisual.querySelector(
+      ".result-character-placeholder",
+    );
+
+    if (!placeholder) {
+      placeholder = document.createElement("div");
+      placeholder.className =
+        "result-character-placeholder";
+
+      characterVisual.appendChild(placeholder);
+    }
+
+    /* 유형이 바뀔 때마다 placeholder 내용도 갱신 */
+    placeholder.innerHTML = `
+      <span>✦</span>
+      <strong>캐릭터 이미지<br>준비 중</strong>
+      <small>${formatTypeCode(code)} TYPE</small>
+    `;
+
+    /*
+    * hidden 속성은 기존 CSS의 display에 덮일 수 있으므로
+    * style.display로 확실하게 숨깁니다.
+    */
+    characterImage.style.display = "none";
+    placeholder.style.display = "none";
+
+    characterImage.onload = () => {
+      characterImage.style.display = "block";
+      placeholder.style.display = "none";
+    };
+
+    characterImage.onerror = () => {
+      characterImage.style.display = "none";
+      placeholder.style.display = "flex";
+
+      /*
+      * 깨진 이미지 아이콘과 alt 문구가 남지 않도록
+      * 실패한 주소를 제거합니다.
+      */
+      characterImage.removeAttribute("src");
+      characterImage.alt = "";
+    };
 
     characterImage.alt =
       `${formatTypeCode(code)} 유형 캐릭터`;
-  }
 
+    characterImage.src =
+      `./assets/characters/${code}.png`;
+  }
+    
   const spectrum = safeGetSpectrumScores(code);
 
   moveAxis("#axis-wc", spectrum.wc);
@@ -792,10 +827,271 @@ function updateResult() {
   moveAxis("#axis-lm", spectrum.lm);
 
   restoreIrisPreview();
+  restoreIrisAnalysisResult();
 }
 
 /* =========================================================
    홍채 분석 결과 표시
+========================================================= */
+
+const DEFAULT_ANALYSIS_COLOR = "#D9DCE5";
+
+function normalizeHexColor(value) {
+  if (!value) {
+    return null;
+  }
+
+  const text = String(value).trim();
+
+  if (/^#[0-9A-Fa-f]{6}$/.test(text)) {
+    return text.toUpperCase();
+  }
+
+  if (/^[0-9A-Fa-f]{6}$/.test(text)) {
+    return `#${text.toUpperCase()}`;
+  }
+
+  return null;
+}
+
+function formatHsv(hsv) {
+  if (!hsv) {
+    return "분석 결과 없음";
+  }
+
+  const h = Number(hsv.h);
+  const s = Number(hsv.s);
+  const v = Number(hsv.v);
+
+  if (
+    !Number.isFinite(h) ||
+    !Number.isFinite(s) ||
+    !Number.isFinite(v)
+  ) {
+    return "분석 결과 없음";
+  }
+
+  return `H ${h.toFixed(0)}, S ${s.toFixed(4)}, V ${v.toFixed(4)}`;
+}
+
+function setColorChipPending(
+  chipSelector,
+  valueSelector,
+  label,
+) {
+  const chip = document.querySelector(chipSelector);
+
+  if (chip) {
+    chip.style.setProperty(
+      "--chip",
+      DEFAULT_ANALYSIS_COLOR,
+    );
+
+    chip.classList.add("is-pending");
+  }
+
+  setText(valueSelector, label);
+}
+
+function setAnalysisPendingState(
+  message = "테스트 전입니다",
+  chipLabel = "테스트 전",
+) {
+  setColorChipPending(
+    "#skin-color-chip",
+    "#skin-color-chip-value",
+    chipLabel,
+  );
+
+  setColorChipPending(
+    "#iris-color-chip",
+    "#iris-color-chip-value",
+    chipLabel,
+  );
+
+  setColorChipPending(
+    "#lens-color-chip",
+    "#lens-color-chip-value",
+    chipLabel,
+  );
+
+  setColorChipPending(
+    "#tone-color-chip",
+    "#tone-color-chip-value",
+    chipLabel,
+  );
+
+  setText("#skin-color-detail", message);
+  setText("#iris-color-detail", message);
+  setText("#eye-face-ratio", message);
+  setText("#skin-hsv-detail", message);
+  setText("#iris-hsv-detail", message);
+}
+
+function updateColorChip(
+  chipSelector,
+  valueSelector,
+  color,
+) {
+  const chip = document.querySelector(chipSelector);
+  const normalizedColor = normalizeHexColor(color);
+
+  if (!chip || !normalizedColor) {
+    setColorChipPending(
+      chipSelector,
+      valueSelector,
+      "결과 없음",
+    );
+
+    return;
+  }
+
+  chip.style.setProperty(
+    "--chip",
+    normalizedColor,
+  );
+
+  chip.classList.remove("is-pending");
+
+  setText(
+    valueSelector,
+    normalizedColor.replace("#", ""),
+  );
+}
+
+function renderIrisAnalysisResult(data) {
+  if (!data || typeof data !== "object") {
+    setAnalysisPendingState();
+    return;
+  }
+
+  updateColorChip(
+    "#skin-color-chip",
+    "#skin-color-chip-value",
+    data.skinColor,
+  );
+
+  updateColorChip(
+    "#iris-color-chip",
+    "#iris-color-chip-value",
+    data.irisColor,
+  );
+
+  updateColorChip(
+    "#lens-color-chip",
+    "#lens-color-chip-value",
+    data.lensColor,
+  );
+
+  updateColorChip(
+    "#tone-color-chip",
+    "#tone-color-chip-value",
+    data.toneColor,
+  );
+
+  const skinColor = normalizeHexColor(
+    data.skinColor,
+  );
+
+  const irisColor = normalizeHexColor(
+    data.irisColor,
+  );
+
+  setText(
+    "#skin-color-detail",
+    skinColor
+      ? `${skinColor} / ${data.skinTone || "톤 분석 완료"}`
+      : "피부톤 결과 없음",
+  );
+
+  setText(
+    "#iris-color-detail",
+    irisColor
+      ? `${irisColor} / ${data.irisTone || "톤 분석 완료"}`
+      : "홍채 컬러 결과 없음",
+  );
+
+  const ratio = Number(data.eyeFaceRatio);
+
+  setText(
+    "#eye-face-ratio",
+    Number.isFinite(ratio)
+      ? `${ratio.toFixed(2)}%`
+      : "비율 결과 없음",
+  );
+
+  setText(
+    "#skin-hsv-detail",
+    formatHsv(data.skinHsv),
+  );
+
+  setText(
+    "#iris-hsv-detail",
+    formatHsv(data.irisHsv),
+  );
+}
+
+function restoreIrisAnalysisResult() {
+  const savedResult = sessionStorage.getItem(
+    "lensiaIrisAnalysisResult",
+  );
+
+  const stateText = sessionStorage.getItem(
+    "lensiaIrisState",
+  );
+
+  let state = null;
+
+  if (stateText) {
+    try {
+      state = JSON.parse(stateText);
+    } catch (error) {
+      console.warn(
+        "홍채 분석 상태를 읽지 못했습니다.",
+        error,
+      );
+    }
+  }
+
+  if (state?.skipped) {
+    setAnalysisPendingState(
+      "홍채 분석을 진행하지 않았어요",
+      "미분석",
+    );
+
+    return;
+  }
+
+  if (!savedResult) {
+    setAnalysisPendingState(
+      state?.hasImage
+        ? "이미지는 등록되었지만 아직 분석 전입니다"
+        : "테스트 전입니다",
+      "테스트 전",
+    );
+
+    return;
+  }
+
+  try {
+    renderIrisAnalysisResult(
+      JSON.parse(savedResult),
+    );
+  } catch (error) {
+    console.warn(
+      "홍채 분석 결과를 읽지 못했습니다.",
+      error,
+    );
+
+    setAnalysisPendingState(
+      "분석 결과를 불러오지 못했어요",
+      "오류",
+    );
+  }
+}
+
+/* =========================================================
+   홍채 이미지 미리보기
 ========================================================= */
 
 function applyIrisResult({
@@ -836,7 +1132,7 @@ function applyIrisResult({
     placeholder.hidden = true;
 
     if (ringLabel) {
-      ringLabel.textContent = "분석 완료";
+      ringLabel.textContent = "분석 대기";
     }
   } else {
     image.removeAttribute("src");
@@ -857,26 +1153,38 @@ function restoreIrisPreview() {
     "lensiaIrisImageDataUrl",
   );
 
-  const skipped =
-    sessionStorage.getItem(
-      "lensiaIrisSkipped",
-    ) === "true";
+  const stateText = sessionStorage.getItem(
+    "lensiaIrisState",
+  );
 
-  if (savedDataUrl) {
+  let state = null;
+
+  if (stateText) {
+    try {
+      state = JSON.parse(stateText);
+    } catch (error) {
+      console.warn(
+        "홍채 이미지 상태를 읽지 못했습니다.",
+        error,
+      );
+    }
+  }
+
+  if (state?.skipped) {
     applyIrisResult({
-      imageUrl: savedDataUrl,
+      imageUrl: null,
       statusText:
-        "· 홍채 컬러 분석 이미지 등록 완료",
+        "· 홍채 이미지 미분석 — LPTI 취향 기반 결과",
     });
 
     return;
   }
 
-  if (skipped) {
+  if (savedDataUrl) {
     applyIrisResult({
-      imageUrl: null,
+      imageUrl: savedDataUrl,
       statusText:
-        "· 홍채 이미지 미분석 — LPTI 취향 기반 결과",
+        "· 홍채 이미지 등록 완료 — 분석 결과 대기 중",
     });
 
     return;
@@ -1159,6 +1467,79 @@ function showResultToast(message) {
     window.setTimeout(() => {
       toast.classList.remove("show");
     }, 2200);
+}
+
+async function saveResultAsImage() {
+  const resultPage = document.querySelector("#result-page");
+
+  if (!resultPage) {
+    showResultToast("저장할 결과 영역을 찾지 못했어요.");
+    return;
+  }
+
+  if (typeof html2canvas === "undefined") {
+    showResultToast("이미지 저장 라이브러리를 불러오지 못했어요.");
+    return;
+  }
+
+  const exportWidth = 1400;
+
+  const captureRoot = document.createElement("div");
+  captureRoot.className = "result-export-capture";
+
+  const clonedPage = resultPage.cloneNode(true);
+
+  captureRoot.appendChild(clonedPage);
+  document.body.appendChild(captureRoot);
+
+  try {
+    /*
+     * 저장용 복제본 보정
+     * - 숨김 페이지를 강제로 보이게
+     * - 반응형 영향 줄이기 위해 고정 폭 사용
+     */
+    clonedPage.classList.add("active-page");
+    clonedPage.style.display = "block";
+    clonedPage.style.width = "100%";
+    clonedPage.style.maxWidth = "none";
+
+    /*
+     * 혹시 결과 페이지 내부에 애니메이션/트랜스폼 때문에 흔들리면
+     * 여기서 추가 보정 가능
+     */
+    const canvas = await html2canvas(clonedPage, {
+      backgroundColor: "#f5f7fb",
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      logging: false,
+
+      width: clonedPage.scrollWidth,
+      height: clonedPage.scrollHeight,
+
+      windowWidth: exportWidth,
+      windowHeight: clonedPage.scrollHeight,
+
+      scrollX: 0,
+      scrollY: 0,
+    });
+
+    const typeCode =
+      document.querySelector("#type-code")?.textContent?.trim() ||
+      "LPTI";
+
+    const link = document.createElement("a");
+    link.download = `lensia-result-${typeCode}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+
+    showResultToast("결과 이미지가 저장되었어요.");
+  } catch (error) {
+    console.error("결과 저장 실패:", error);
+    showResultToast("결과 이미지를 저장하지 못했어요.");
+  } finally {
+    captureRoot.remove();
+  }
 }
 
 /* =========================================================
