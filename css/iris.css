@@ -932,3 +932,13 @@
       rgba(238, 246, 251, 0.78)
     ) !important;
 }
+
+.iris-placeholder-eye-image {
+  display: block;
+  width: min(220px, 58%);
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto 20px;
+  pointer-events: none;
+  user-select: none;
+}

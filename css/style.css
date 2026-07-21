@@ -3336,3 +3336,61 @@ body {
 .nav-link:not(.active):hover {
   color: #6f7f9d !important;
 }
+
+/* ================================
+   토스트 팝업
+================================ */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 42px;
+  z-index: 9999;
+
+  max-width: calc(100vw - 40px);
+  padding: 15px 24px;
+
+  color: #595959;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: center;
+  white-space: nowrap;
+
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(220, 218, 235, 0.9);
+  border-radius: 999px;
+  box-shadow:
+    0 14px 36px rgba(75, 70, 105, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: translate(-50%, 18px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 560px) {
+  .toast {
+    bottom: 24px;
+    width: max-content;
+    max-width: calc(100vw - 28px);
+    padding: 13px 18px;
+    font-size: 14px;
+    white-space: normal;
+  }
+}
