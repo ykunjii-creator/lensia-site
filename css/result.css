@@ -414,21 +414,13 @@
   height: 112px;
   display: grid;
   place-content: center;
+  overflow: hidden;
   border-radius: 15px;
-  color: rgba(100,95,120,.5);
+  color: rgba(100, 95, 120, 0.5);
   font-size: 14px;
   font-weight: 900;
   letter-spacing: 1.4px;
-  background:
-    radial-gradient(circle, rgba(255,255,255,.94), rgba(237,220,202,.75) 35%, rgba(221,190,163,.68));
-}
-
-.result-product-card:nth-child(2) .result-product-image-placeholder {
-  background: radial-gradient(circle, #fff, #f4e5c9 42%, #ecd7b0);
-}
-
-.result-product-card:nth-child(3) .result-product-image-placeholder {
-  background: radial-gradient(circle, #fff, #eadfd3 42%, #dcc8b7);
+  background: transparent;
 }
 
 .result-product-card h3 {
