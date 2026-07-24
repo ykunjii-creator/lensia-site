@@ -72,11 +72,47 @@
         );
       }
 
-      const height = Math.ceil(
-        Math.max(
-          target.scrollHeight,
-          target.getBoundingClientRect().height,
-        ),
+      const targetRect =
+        target.getBoundingClientRect();
+
+      const lastChild =
+        target.lastElementChild;
+
+      const lastChildRect =
+        lastChild?.getBoundingClientRect();
+
+      /*
+      * 마지막 콘텐츠 끝부분 + 하단 패딩까지만 저장
+      */
+      const contentHeight =
+        lastChildRect
+          ? lastChildRect.bottom -
+            targetRect.top +
+            54
+          : targetRect.height;
+
+      const height =
+        Math.ceil(contentHeight);
+
+      /*
+      * 원본에서 복사된 긴 높이를 실제 콘텐츠 높이로 덮어씀
+      */
+      target.style.setProperty(
+        "height",
+        `${height}px`,
+        "important",
+      );
+
+      target.style.setProperty(
+        "min-height",
+        "0",
+        "important",
+      );
+
+      target.style.setProperty(
+        "max-height",
+        `${height}px`,
+        "important",
       );
 
       const canvas = await window.html2canvas(target, {
@@ -115,13 +151,167 @@
             return;
           }
 
-          clonedTarget.style.width =
-            `${CONFIG.width}px`;
+          clonedTarget.style.setProperty(
+            "width",
+            `${CONFIG.width}px`,
+            "important",
+          );
 
-          clonedTarget.style.minWidth =
-            `${CONFIG.width}px`;
+          clonedTarget.style.setProperty(
+            "min-width",
+            `${CONFIG.width}px`,
+            "important",
+          );
 
-          clonedTarget.style.maxWidth = "none";
+          clonedTarget.style.setProperty(
+            "max-width",
+            "none",
+            "important",
+          );
+
+          clonedTarget.style.setProperty(
+            "height",
+            `${height}px`,
+            "important",
+          );
+
+          clonedTarget.style.setProperty(
+            "min-height",
+            "0",
+            "important",
+          );
+
+          clonedTarget.style.setProperty(
+            "max-height",
+            `${height}px`,
+            "important",
+          );
+
+          clonedTarget.style.setProperty(
+            "overflow",
+            "hidden",
+            "important",
+          );
+
+          /*
+          * html2canvas의 object-fit 오류 방지
+          * 가상착용 이미지를 배경 이미지로 변경
+          */
+          const tryOnPanels =
+            clonedTarget.querySelectorAll(
+              [
+                ".lensia-export-tryon-panel",
+                ".result-tryon-preview",
+              ].join(", "),
+            );
+
+          tryOnPanels.forEach((panel) => {
+            const image =
+              panel.querySelector("img");
+
+            if (!image) {
+              return;
+            }
+
+            const source =
+              image.currentSrc ||
+              image.getAttribute("src");
+
+            if (!source) {
+              return;
+            }
+
+            panel.style.setProperty(
+              "background-image",
+              `url("${source}")`,
+              "important",
+            );
+
+            panel.style.setProperty(
+              "background-size",
+              "cover",
+              "important",
+            );
+
+            panel.style.setProperty(
+              "background-position",
+              "center center",
+              "important",
+            );
+
+            panel.style.setProperty(
+              "background-repeat",
+              "no-repeat",
+              "important",
+            );
+
+            image.style.setProperty(
+              "display",
+              "none",
+              "important",
+            );
+          });
+
+          const irisImages =
+            clonedTarget.querySelectorAll(
+              ".result-iris-image",
+            );
+
+          irisImages.forEach((image) => {
+            const source =
+              image.currentSrc ||
+              image.getAttribute("src");
+
+            if (!source) {
+              return;
+            }
+
+            const imageContainer =
+              image.closest(
+                ".result-iris-preview",
+              ) ||
+              image.parentElement;
+
+            if (!imageContainer) {
+              return;
+            }
+
+            imageContainer.style.setProperty(
+              "background-image",
+              `url("${source}")`,
+              "important",
+            );
+
+            imageContainer.style.setProperty(
+              "background-size",
+              "cover",
+              "important",
+            );
+
+            imageContainer.style.setProperty(
+              "background-position",
+              "center center",
+              "important",
+            );
+
+            imageContainer.style.setProperty(
+              "background-repeat",
+              "no-repeat",
+              "important",
+            );
+
+            imageContainer.style.setProperty(
+              "overflow",
+              "hidden",
+              "important",
+            );
+
+            image.style.setProperty(
+              "display",
+              "none",
+              "important",
+            );
+          });          
         },
       });
 

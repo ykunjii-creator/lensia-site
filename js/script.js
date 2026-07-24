@@ -743,7 +743,7 @@ function showPage(name) {
   introNavLink?.classList.toggle('active', name === 'intro');
 
   if (name === 'quiz') renderQuestion();
-  if (name === 'result') updateResult();
+  if (name === 'result') updateResult();  initializeTryOn();
 
   window.scrollTo({
     top: 0,

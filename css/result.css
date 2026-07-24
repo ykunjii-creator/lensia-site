@@ -65,7 +65,7 @@
   min-height: 210px;
   margin-top: 18px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 96px;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   gap: 14px;
 }
@@ -2238,4 +2238,52 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #aaa8b8;
+}
+
+/* hidden 속성이 기존 display 스타일에 덮이지 않도록 처리 */
+#result-iris-image[hidden],
+#result-iris-placeholder[hidden],
+#tryon-original-image[hidden],
+#tryon-result-image[hidden] {
+  display: none !important;
+}
+
+/* 920px 이상: 기존 사진 → 가상 착용 결과 가로 배치 */
+@media (min-width: 920px) {
+  .result-tryon-preview-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .result-tryon-preview {
+    min-height: 430px;
+  }
+
+  .result-tryon-arrow {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* 919px 이하: 세로 배치 */
+@media (max-width: 919px) {
+  .result-tryon-preview-wrap {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(280px, auto));
+    gap: 20px;
+  }
+
+  .result-tryon-preview {
+    min-height: 280px;
+  }
+
+  .result-tryon-arrow {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
 }

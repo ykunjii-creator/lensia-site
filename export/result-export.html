@@ -135,9 +135,6 @@
     #result-preview-frame {
       display: block;
 
-      width: 1400px;
-      height: 1800px;
-
       border: 0;
 
       background: #f9f9f9;
@@ -462,14 +459,11 @@
           iframe 높이를 자동으로 조절합니다.
         */
         window.setTimeout(() => {
-          const contentHeight = Math.max(
-            resultSection.scrollHeight,
-            dashboard.scrollHeight,
-            frameDocument.body.scrollHeight,
-          );
+          const dashboardHeight =
+            dashboard.getBoundingClientRect().height;
 
           frame.style.height =
-            `${contentHeight}px`;
+            `${Math.ceil(dashboardHeight)}px`;
         }, 250);
       }
 

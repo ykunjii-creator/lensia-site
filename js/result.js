@@ -1098,17 +1098,21 @@ function applyIrisResult({
   imageUrl,
   statusText = "· 홍채 컬러 분석 포함 결과",
 }) {
+  const preview = document.querySelector(
+    "#result-iris-preview"
+  );
+
   const image = document.querySelector(
-    "#result-iris-image",
+    "#result-iris-image"
   );
 
   const placeholder = document.querySelector(
-    "#result-iris-placeholder",
+    "#result-iris-placeholder"
   );
 
-  const ringLabel = document.querySelector(
-    ".result-iris-ring b",
-  );
+  // const ringLabel = document.querySelector(
+  //   ".result-iris-ring b"
+  // );
 
   if (!image || !placeholder) {
     return;
@@ -1119,33 +1123,51 @@ function applyIrisResult({
     resultState.irisImageUrl.startsWith("blob:")
   ) {
     URL.revokeObjectURL(
-      resultState.irisImageUrl,
+      resultState.irisImageUrl
     );
   }
 
   resultState.irisImageUrl = imageUrl || null;
 
   if (resultState.irisImageUrl) {
+    /*
+     * 이미지가 있을 때
+     */
     image.src = resultState.irisImageUrl;
     image.hidden = false;
+    image.style.display = "block";
 
     placeholder.hidden = true;
+    placeholder.style.display = "none";
 
-    if (ringLabel) {
-      ringLabel.textContent = "분석 대기";
-    }
+    preview?.classList.remove("is-empty");
+
+    // if (ringLabel) {
+    //   ringLabel.textContent = "분석 대기";
+    // }
+
   } else {
+    /*
+     * 이미지가 없을 때
+     */
     image.removeAttribute("src");
     image.hidden = true;
+    image.style.display = "none";
 
     placeholder.hidden = false;
+    placeholder.style.display = "";
 
-    if (ringLabel) {
-      ringLabel.textContent = "분석 대기";
-    }
+    preview?.classList.add("is-empty");
+
+    // if (ringLabel) {
+    //   ringLabel.textContent = "분석 대기";
+    // }
   }
 
-  setText("#iris-result-status", statusText);
+  setText(
+    "#iris-result-status",
+    statusText
+  );
 }
 
 function restoreIrisPreview() {
@@ -1202,121 +1224,213 @@ function restoreIrisPreview() {
 ========================================================= */
 
 function initializeTryOn() {
-  const cameraButton = document.querySelector(
-    "#tryon-camera-button",
+  /*
+   * 홍채 분석 단계에서 저장한 사진을
+   * 가상 착용 기존 사진 칸에 자동 적용
+   */
+  const savedIrisImage = sessionStorage.getItem(
+    "lensiaIrisImageDataUrl"
   );
 
-  const uploadButton = document.querySelector(
-    "#tryon-upload-button",
-  );
+  if (savedIrisImage) {
+    setTryOnImage(savedIrisImage);
+  } else {
+    resetTryOnImage();
+  }
 
-  const cameraInput = document.querySelector(
-    "#tryon-camera-input",
-  );
-
-  const fileInput = document.querySelector(
-    "#tryon-file-input",
-  );
-
-  const analyzeButton = document.querySelector(
-    "#tryon-analyze-button",
-  );
-
-  cameraButton?.addEventListener("click", () => {
-    cameraInput?.click();
-  });
-
-  uploadButton?.addEventListener("click", () => {
-    fileInput?.click();
-  });
-
-  cameraInput?.addEventListener(
-    "change",
-    handleTryOnFile,
-  );
-
-  fileInput?.addEventListener(
-    "change",
-    handleTryOnFile,
-  );
-
-  analyzeButton?.addEventListener("click", () => {
-    if (!resultState.tryOnImageUrl) {
-      showResultToast(
-        "가상 착용에 사용할 사진을 먼저 선택해 주세요.",
-      );
-
-      return;
-    }
-
-    if (!resultState.selectedLensName) {
-      showResultToast(
-        "먼저 추천 렌즈의 가상 착용 버튼을 선택해 주세요.",
-      );
-
-      return;
-    }
-
-    const resultImage = document.querySelector(
-      "#tryon-result-image",
-    );
-
-    const resultPlaceholder =
-      document.querySelector(
-        "#tryon-result-placeholder",
-      );
-
-    if (resultImage) {
-      resultImage.src =
-        resultState.tryOnImageUrl;
-
-      resultImage.hidden = false;
-    }
-
-    if (resultPlaceholder) {
-      resultPlaceholder.hidden = true;
-    }
-
-    showResultToast(
-      `${resultState.selectedLensName} 가상 착용 API 연결 자리입니다.`,
-    );
-  });
-
+  /*
+   * 추천 렌즈의 가상 착용 버튼
+   *
+   * 이미 이벤트가 연결된 버튼에는
+   * 다시 연결하지 않음
+   */
   document
     .querySelectorAll(".result-try-button")
     .forEach((button) => {
+      if (button.dataset.tryOnBound === "true") {
+        return;
+      }
+
+      button.dataset.tryOnBound = "true";
+
       button.addEventListener("click", () => {
+        const productCard = button.closest(
+          ".result-product-card"
+        );
+
         resultState.selectedLensId =
           button.dataset.lensId ||
-          button.closest(
-            ".result-product-card",
-          )?.dataset.lensId ||
+          productCard?.dataset.lensId ||
           null;
 
         resultState.selectedLensName =
           button.dataset.lensName ||
           "선택 렌즈";
 
-        if (resultState.tryOnImageUrl) {
-          showResultToast(
-            `${resultState.selectedLensName} 렌즈를 선택했어요.`,
+        /*
+         * 버튼 클릭 시점에도 한 번 더 확인
+         * 결과 페이지가 다시 열렸거나 사진이 갱신된 경우 대응
+         */
+        const latestIrisImage =
+          sessionStorage.getItem(
+            "lensiaIrisImageDataUrl"
           );
-        } else {
-          showResultToast(
-            `${resultState.selectedLensName} 렌즈를 선택했어요. 사진을 준비해 주세요.`,
-          );
+
+        if (
+          latestIrisImage &&
+          latestIrisImage !==
+            resultState.tryOnImageUrl
+        ) {
+          setTryOnImage(latestIrisImage);
         }
 
+        if (!resultState.tryOnImageUrl) {
+          showResultToast(
+            "홍채 분석에 사용한 사진이 없어요."
+          );
+
+          document
+            .querySelector(".result-tryon-card")
+            ?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+
+          return;
+        }
+
+        applyTryOnResult();
+
         document
-          .querySelector(
-            ".result-tryon-card",
-          )
+          .querySelector(".result-tryon-card")
           ?.scrollIntoView({
             behavior: "smooth",
             block: "start",
           });
       });
     });
+}
+
+function resetTryOnImage() {
+  resultState.tryOnImageFile = null;
+  resultState.tryOnImageUrl = null;
+
+  const originalImage = document.querySelector(
+    "#tryon-original-image"
+  );
+
+  const originalPlaceholder = document.querySelector(
+    "#tryon-original-placeholder"
+  );
+
+  const resultImage = document.querySelector(
+    "#tryon-result-image"
+  );
+
+  const resultPlaceholder = document.querySelector(
+    "#tryon-result-placeholder"
+  );
+
+  if (originalImage) {
+    originalImage.removeAttribute("src");
+    originalImage.hidden = true;
+  }
+
+  if (originalPlaceholder) {
+    originalPlaceholder.hidden = false;
+  }
+
+  if (resultImage) {
+    resultImage.removeAttribute("src");
+    resultImage.hidden = true;
+  }
+
+  if (resultPlaceholder) {
+    resultPlaceholder.hidden = false;
+  }
+}
+
+function applyTryOnResult() {
+  if (!resultState.tryOnImageUrl) {
+    return;
+  }
+
+  const resultImage = document.querySelector(
+    "#tryon-result-image"
+  );
+
+  const resultPlaceholder = document.querySelector(
+    "#tryon-result-placeholder"
+  );
+
+  /*
+   * 현재는 실제 가상 착용 API 연결 전이므로
+   * 원본 이미지를 결과 칸에 표시
+   *
+   * API 연결 후에는 이 부분에서
+   * 선택 렌즈와 원본 이미지를 서버로 전송하고,
+   * 반환받은 결과 이미지를 넣으면 됨
+   */
+  if (resultImage) {
+    resultImage.src = resultState.tryOnImageUrl;
+    resultImage.hidden = false;
+  }
+
+  if (resultPlaceholder) {
+    resultPlaceholder.hidden = true;
+  }
+
+  showResultToast(
+    `${resultState.selectedLensName} 가상 착용 결과를 표시했어요.`
+  );
+}
+
+function setTryOnImage(imageUrl) {
+  if (!imageUrl) {
+    resetTryOnImage();
+    return;
+  }
+
+  resultState.tryOnImageFile = null;
+  resultState.tryOnImageUrl = imageUrl;
+
+  const originalImage = document.querySelector(
+    "#tryon-original-image"
+  );
+
+  const originalPlaceholder = document.querySelector(
+    "#tryon-original-placeholder"
+  );
+
+  const resultImage = document.querySelector(
+    "#tryon-result-image"
+  );
+
+  const resultPlaceholder = document.querySelector(
+    "#tryon-result-placeholder"
+  );
+
+  if (originalImage) {
+    originalImage.src = imageUrl;
+    originalImage.hidden = false;
+  }
+
+  if (originalPlaceholder) {
+    originalPlaceholder.hidden = true;
+  }
+
+  /*
+   * 원본 사진이 새로 연결될 때는
+   * 이전 가상 착용 결과 초기화
+   */
+  if (resultImage) {
+    resultImage.removeAttribute("src");
+    resultImage.hidden = true;
+  }
+
+  if (resultPlaceholder) {
+    resultPlaceholder.hidden = false;
+  }
 }
 
 function handleTryOnFile(event) {
@@ -1328,77 +1442,22 @@ function handleTryOnFile(event) {
 
   if (!file.type.startsWith("image/")) {
     showResultToast(
-      "이미지 파일만 선택할 수 있어요.",
+      "이미지 파일만 선택할 수 있어요."
     );
 
     event.target.value = "";
-
     return;
   }
 
-  if (
-    resultState.tryOnImageUrl &&
-    resultState.tryOnImageUrl.startsWith("blob:")
-  ) {
-    URL.revokeObjectURL(
-      resultState.tryOnImageUrl,
-    );
-  }
+  const imageUrl = URL.createObjectURL(file);
 
-  resultState.tryOnImageFile = file;
+  setTryOnImage(imageUrl, {
+    file,
+    statusText: `● ${file.name}`,
+  });
 
-  resultState.tryOnImageUrl =
-    URL.createObjectURL(file);
-
-  const originalImage = document.querySelector(
-    "#tryon-original-image",
-  );
-
-  const originalPlaceholder =
-    document.querySelector(
-      "#tryon-original-placeholder",
-    );
-
-  const resultImage = document.querySelector(
-    "#tryon-result-image",
-  );
-
-  const resultPlaceholder =
-    document.querySelector(
-      "#tryon-result-placeholder",
-    );
-
-  const analyzeButton = document.querySelector(
-    "#tryon-analyze-button",
-  );
-
-  if (originalImage) {
-    originalImage.src =
-      resultState.tryOnImageUrl;
-
-    originalImage.hidden = false;
-  }
-
-  if (originalPlaceholder) {
-    originalPlaceholder.hidden = true;
-  }
-
-  if (resultImage) {
-    resultImage.removeAttribute("src");
-    resultImage.hidden = true;
-  }
-
-  if (resultPlaceholder) {
-    resultPlaceholder.hidden = false;
-  }
-
-  if (analyzeButton) {
-    analyzeButton.disabled = false;
-  }
-
-  setText(
-    "#tryon-file-status",
-    `● ${file.name}`,
+  showResultToast(
+    "새로운 이미지를 불러왔어요."
   );
 }
 

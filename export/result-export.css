@@ -20,6 +20,14 @@
   width: 1400px !important;
   min-width: 1400px !important;
   max-width: none !important;
+
+    /* 추가 */
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  align-content: start !important;
+  overflow: visible !important;
+
   margin: 0 !important;
   padding: 54px !important;
 
@@ -38,6 +46,11 @@
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif !important;
+}
+
+.lensia-export-stage .lensia-export-mode {
+  height: fit-content !important;
+  min-height: 0 !important;
 }
 
 .lensia-export-mode,
@@ -211,7 +224,7 @@
   overflow: visible !important;
 }
 
-/* 양쪽 사진박스 */
+/* 양쪽 가상 착용 사진 박스 */
 .lensia-export-mode .lensia-export-tryon-panel,
 .lensia-export-mode .result-tryon-preview {
   position: relative !important;
@@ -222,23 +235,32 @@
   height: 430px !important;
 
   margin: 0 !important;
-  padding: 24px !important;
+  padding: 0 !important;
 
   display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  align-items: stretch !important;
+  justify-content: stretch !important;
 
-  align-self: stretch !important;
-  justify-self: stretch !important;
-
-  flex: none !important;
-
-  background: #f8fbfe !important;
-  background-image: none !important;
+  background-color: #f8fbfe !important;
   border: 1px dashed #d9e2ee !important;
   border-radius: 24px !important;
-  box-shadow: none !important;
   overflow: hidden !important;
+}
+
+/* 홍채 분석 이미지 저장 안정화 */
+.lensia-export-mode .result-iris-preview {
+  position: relative !important;
+  overflow: hidden !important;
+
+  background-color: #f8fbfe !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.lensia-export-mode .result-iris-image {
+  object-fit: cover !important;
+  object-position: center center !important;
 }
 
 /* 첫 번째 / 마지막 패널을 각 열에 강제 배치 */
@@ -307,20 +329,22 @@
   transform: translateY(-1px) !important;
 }
 
-/* 미리보기 사진 */
+/* 사진은 비율 유지한 채 박스를 꽉 채우고 넘치는 부분 자르기 */
 .lensia-export-mode .lensia-export-tryon-panel img,
 .lensia-export-mode .result-tryon-preview img {
   display: block !important;
 
   width: 100% !important;
   height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
 
-  object-fit: contain !important;
-  object-position: center !important;
+  object-fit: cover !important;
+  object-position: center center !important;
 
-  border-radius: 18px !important;
+  border-radius: 0 !important;
   visibility: visible !important;
 }
 
